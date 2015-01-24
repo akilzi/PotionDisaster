@@ -11,6 +11,8 @@ public class PotionCombinations : MonoBehaviour {
 	string potionB;
 	string mixtures;
 	public GameObject mixtureTub;
+	public GameObject Potion_A_Selected;
+	public GameObject Potion_B_Selected;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +34,7 @@ public class PotionCombinations : MonoBehaviour {
 		if (numberOfPotionsSelected == 2)
 		{
 			potionB = "Red";
+			Potion_B_Selected.renderer.sharedMaterial.color = Color.red;
 			checkMixtures ();
 			Debug.Log ("mixture complete" + ", " + "potions are:" + " " +  "potion A =" + " " + potionA + ", " + "potion B =" + " " + potionB + " -- " + "mixture is:" + " " + mixtures);
 			numberOfPotionsSelected = 1;
@@ -43,7 +46,8 @@ public class PotionCombinations : MonoBehaviour {
 			numberOfPotionsSelected ++;
 			Red = true;
 			potionA = "Red";
-			checkMixtures ();
+			Potion_A_Selected.renderer.sharedMaterial.color = Color.red;
+			//checkMixtures ();
 		}
 	}
 
@@ -55,6 +59,7 @@ public class PotionCombinations : MonoBehaviour {
 		if (numberOfPotionsSelected == 2)
 		{
 			potionB = "Blue";
+			Potion_B_Selected.renderer.sharedMaterial.color = Color.blue;
 			checkMixtures ();
 			Debug.Log ("mixture complete" + ", " + "potions are:" + " " +  "potion A =" + " " + potionA + ", " + "potion B =" + " " + potionB + " -- " + "mixture is:" + " " + mixtures);
 			numberOfPotionsSelected = 1;
@@ -66,7 +71,8 @@ public class PotionCombinations : MonoBehaviour {
 			numberOfPotionsSelected ++;
 			Blue = true;
 			potionA = "Blue";
-			checkMixtures ();
+			Potion_A_Selected.renderer.sharedMaterial.color = Color.blue;
+
 		}
 	}
 
@@ -78,6 +84,7 @@ public class PotionCombinations : MonoBehaviour {
 		if (numberOfPotionsSelected == 2) 
 		{
 			potionB = "Yellow";
+			Potion_B_Selected.renderer.sharedMaterial.color = Color.yellow;
 			checkMixtures ();
 			Debug.Log ("mixture complete" + ", " + "potions are:" + " " +  "potion A =" + " " + potionA + ", " + "potion B =" + " " + potionB + " -- " + "mixture is:" + " " + mixtures);
 			numberOfPotionsSelected = 1;
@@ -89,7 +96,8 @@ public class PotionCombinations : MonoBehaviour {
 			numberOfPotionsSelected ++;
 			Yellow = true;
 			potionA = "Yellow";
-			checkMixtures ();
+			Potion_A_Selected.renderer.sharedMaterial.color = Color.yellow;
+		
 		}
 	}
 
@@ -120,11 +128,11 @@ public class PotionCombinations : MonoBehaviour {
 				}
 				if (potionA == "Red" && potionB == "Yellow") {
 						mixtures = "Orange";
-						mixtureTub.renderer.sharedMaterial.color = Color.black;
+						mixtureTub.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
 				}
 				if (potionA == "Yellow" && potionB == "Red") {
 						mixtures = "Orange";
-						mixtureTub.renderer.sharedMaterial.color = Color.black;
+						mixtureTub.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
 				}
 				if (potionA == "Blue" && potionB == "Yellow") {
 						mixtures = "Green";
