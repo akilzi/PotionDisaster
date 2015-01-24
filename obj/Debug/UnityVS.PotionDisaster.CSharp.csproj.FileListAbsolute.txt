@@ -1,0 +1,14 @@
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\Photon3Unity3D.dll
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\PlayMaker.dll
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+C:\projects\PotionDisaster\Temp\UnityVS_bin\Debug\Photon3Unity3D.xml
+C:\projects\PotionDisaster\obj\Debug\UnityVS.PotionDisaster.CSharp.csprojResolveAssemblyReference.cache
+C:\projects\PotionDisaster\obj\Debug\Assembly-CSharp.dll
+C:\projects\PotionDisaster\obj\Debug\Assembly-CSharp.pdb
