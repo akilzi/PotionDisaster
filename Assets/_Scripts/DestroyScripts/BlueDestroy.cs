@@ -4,6 +4,7 @@ using System.Collections;
 public class BlueDestroy : MonoBehaviour {
 	
 	public GameObject Bullet;
+	public GameObject CountManager;
 	
 	// Use this for initialization
 	void Start () {
@@ -17,9 +18,11 @@ public class BlueDestroy : MonoBehaviour {
 	
 	public void OnCollisionEnter2D(Collision2D node)
 	{
+		Debug.Log ("deadly bullet");
 		if(Bullet.renderer.sharedMaterial.color == Color.blue)
 		{
 			if(node.gameObject.tag == "Bullet")
+				CountManager.GetComponent<CountManager>().removeEnemy(gameObject);
 				Destroy(gameObject);
 			//instantiate particle effect
 		}
