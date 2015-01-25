@@ -18,7 +18,7 @@ public class MixController : MonoBehaviour
     public Sprite Sprite75;
     public Sprite Sprite100;
     public int PotionGain = 25;
-    public int PotionCost = 25;
+    public int PotionCost = 1;
 
     public int MixAmount = 0; //Can go to 100
 	void Start () 
@@ -31,24 +31,27 @@ public class MixController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        switch (MixAmount)
-        {
-            case 0:
-                MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite0;
-                break;
-            case 25:
-                MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite25;
-                break;
-            case 50:
-                MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite50;
-                break;
-            case 75:
-                MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite75;
-                break;
-            case 100:
-                MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite100;
-                break;
-        }
+	    if (MixAmount == 0)
+	    {
+            MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite0;
+                
+	    } else if (MixAmount <= 25)
+	    {
+            MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite25;
+                
+	    } else if (MixAmount <= 50)
+	    {
+            MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite50;
+                
+	    } else if (MixAmount <= 75)
+	    {
+            MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite75;
+                
+	    } else if (MixAmount <= 100)
+	    {
+            MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite100;
+                
+	    }
 	}
 
     public void MixButtonPressed()
