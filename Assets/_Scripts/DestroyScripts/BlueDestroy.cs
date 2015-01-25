@@ -17,7 +17,6 @@ public class BlueDestroy : MonoBehaviour {
 	
 	public void OnCollisionEnter2D(Collision2D node)
 	{
-		Debug.Log ("deadly bullet");
 		if(Bullet.renderer.sharedMaterial.color == Color.blue)
 		{
 			if(node.gameObject.tag == "Bullet")
