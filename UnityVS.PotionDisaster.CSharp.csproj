@@ -825,6 +825,7 @@
     <Compile Include="Assets\PlayMaker\Actions\iTween\iTweenStop.cs" />
     <Compile Include="Assets\PlayMaker\Include\iTweenFSMEvents.cs" />
     <Compile Include="Assets\_Scripts\BulletController.cs" />
+    <Compile Include="Assets\_Scripts\MonsterScript.cs" />
     <Compile Include="Assets\_Scripts\PlayerController.cs" />
     <Compile Include="Assets\_Scripts\PotionCombinations.cs" />
     <Compile Include="Assets\iTween\iTween.cs" />
