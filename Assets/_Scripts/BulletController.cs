@@ -1,4 +1,4 @@
-﻿using HutongGames.PlayMaker.Actions;
+﻿using System.Collections;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -38,13 +38,5 @@ public class BulletController : MonoBehaviour
         Vector3 b = vector;
         b *= (1 - reductionLength / vector.magnitude);
         return b;
-    }
-
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.gameObject.tag == "Wall")
-        {
-            GameObject.Destroy(gameObject);
-        }
     }
 }

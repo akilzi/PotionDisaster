@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CountManager : MonoBehaviour {
 	
@@ -17,11 +16,11 @@ public class CountManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(totalEnemiesInt >= 80)
-		{
-			GameManager.GetComponent<GameController>().NextState();
+        //if(totalEnemiesInt >= 40)
+        //{
+        //    GameManager.GetComponent<GameController>().NextState();
 
-		}
+        //}
 		
 	}
 	

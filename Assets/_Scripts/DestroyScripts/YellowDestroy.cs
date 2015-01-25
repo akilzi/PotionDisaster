@@ -8,8 +8,9 @@ public class YellowDestroy : MonoBehaviour {
 	public GameObject CountManager;
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start ()
+	{
+	    CountManager = GameObject.FindGameObjectWithTag("CountManager");
 	}
 	
 	// Update is called once per frame
@@ -23,8 +24,8 @@ public class YellowDestroy : MonoBehaviour {
 		{
 			if(node.gameObject.tag == "Bullet")
 			{
-			CountManager.GetComponent<CountManager>().removeEnemy(gameObject);
-			Destroy(gameObject);
+			    CountManager.GetComponent<CountManager>().removeEnemy(gameObject);
+			    Destroy(gameObject);
 			}
 		//instantiate particle effect
 		}
