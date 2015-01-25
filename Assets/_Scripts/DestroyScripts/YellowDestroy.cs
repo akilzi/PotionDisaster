@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class YellowDestroy : MonoBehaviour {
 
+	//public GameObject ThisIsMe;
 	public GameObject Bullet;
+	public GameObject CountManager;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +22,10 @@ public class YellowDestroy : MonoBehaviour {
 		if(Bullet.renderer.sharedMaterial.color == Color.yellow)
 		{
 			if(node.gameObject.tag == "Bullet")
+			{
+			CountManager.GetComponent<CountManager>().removeEnemy(gameObject);
 			Destroy(gameObject);
+			}
 		//instantiate particle effect
 		}
 	}
