@@ -8,7 +8,7 @@ public class OrangeDestroy: MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
+        CountManager = GameObject.FindGameObjectWithTag("CountManager");
 	}
 	
 	// Update is called once per frame
@@ -18,13 +18,14 @@ public class OrangeDestroy: MonoBehaviour {
 	
 	public void OnCollisionEnter2D(Collision2D node)
 	{
-		Debug.Log ("deadly bullet");
 		if(Bullet.renderer.sharedMaterial.color == Color.green)
 		{
-			if(node.gameObject.tag == "Bullet")
-				CountManager.GetComponent<CountManager>().removeEnemy(gameObject);
-				Destroy(gameObject);
-			//instantiate particle effect
+		    if (node.gameObject.tag == "Bullet")
+		    {
+		        CountManager.GetComponent<CountManager>().removeEnemy(gameObject);
+		        Destroy(gameObject);
+		    }
+		    //instantiate particle effect
 		}
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
 public enum GameState
 {
@@ -27,7 +25,7 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-        GameObject.DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
 	    GameState = GameState.STARTING;
 	}
 	

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -84,7 +83,7 @@ public class PlayerController : MonoBehaviour
     {
         Bullet.transform.position = new Vector3(position.x, position.y, position.z);
         Bullet.GetComponent<BulletController>().forceVector = forceVector;
-        GameObject.Instantiate(Bullet);
+        Instantiate(Bullet);
         
         Bullet.rigidbody2D.AddForce(forceVector);
     }

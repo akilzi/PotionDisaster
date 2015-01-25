@@ -1,4 +1,4 @@
-﻿using HutongGames.PlayMaker.Actions;
+﻿using System.Collections;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -13,14 +13,17 @@ public class BulletController : MonoBehaviour
 	    _potionLogic = GameObject.FindGameObjectWithTag("PotionLogic");
 	    _potionCombinations = _potionLogic.GetComponent<PotionCombinations>();
 	    renderer.sharedMaterial.color = _potionCombinations.SelectedColor;
+	    StartCoroutine(TTL());
+
+        if (renderer.sharedMaterial.color == Color.white)
+        {
+            renderer.sharedMaterial.color = _potionCombinations.SelectedColor;
+        }
 	}
 	
 	void Update () 
     {
-	    if (renderer.sharedMaterial.color == Color.white)
-	    {
-            renderer.sharedMaterial.color = _potionCombinations.SelectedColor;
-	    }
+	    
 
 	    if (gameObject.activeSelf)
 	    {
@@ -40,11 +43,11 @@ public class BulletController : MonoBehaviour
         return b;
     }
 
-    void OnTriggerEnter2D(Collider2D coll)
+    IEnumerator TTL()
     {
-        if (coll.gameObject.tag == "Wall")
-        {
-            GameObject.Destroy(gameObject);
-        }
+        for (float timer = 3f; timer >= 0; timer -= Time.deltaTime)
+            yield return 0;
+
+        Destroy(gameObject);
     }
 }
