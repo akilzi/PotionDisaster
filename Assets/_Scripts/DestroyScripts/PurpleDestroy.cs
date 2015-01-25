@@ -17,7 +17,6 @@ public class PurpleDestroy : MonoBehaviour {
 	
 	public void OnCollisionEnter2D(Collision2D node)
 	{
-		Debug.Log ("deadly bullet");
 		if(Bullet.renderer.sharedMaterial.color == Color.magenta)
 		{
 			if(node.gameObject.tag == "Bullet")

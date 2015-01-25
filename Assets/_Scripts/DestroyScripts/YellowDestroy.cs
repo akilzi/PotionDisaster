@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class YellowDestroy : MonoBehaviour {
 
@@ -17,7 +18,6 @@ public class YellowDestroy : MonoBehaviour {
 
 	public void OnCollisionEnter2D(Collision2D node)
 	{
-		Debug.Log ("deadly bullet");
 		if(Bullet.renderer.sharedMaterial.color == Color.yellow)
 		{
 			if(node.gameObject.tag == "Bullet")
