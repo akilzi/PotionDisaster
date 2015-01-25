@@ -24,12 +24,12 @@ public class BulletController : MonoBehaviour
 
 	    if (gameObject.activeSelf)
 	    {
-	        if (!float.IsNaN(forceVector.x))
-	        {
-                rigidbody2D.AddForce(forceVector);
-	        }
+            //if (!float.IsNaN(forceVector.x))
+            //{
+            //    rigidbody2D.AddForce(forceVector);
+            //}
 
-	        forceVector = shortenLength(forceVector, 1000);
+            //forceVector = shortenLength(forceVector, 1000);
 	    }
     }
 
