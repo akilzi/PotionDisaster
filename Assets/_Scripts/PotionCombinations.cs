@@ -37,11 +37,11 @@ public class PotionCombinations : MonoBehaviour
 
     private void Update()
     {
+
         if (potionA == "Red" && potionB == "Red")
         {
             mixtures = "Super Red";
             mixButton.renderer.sharedMaterial.color = Color.red;
-            SelectedColor = Color.red;
             Red = true;
             Blue = false;
             Yellow = false;
@@ -49,11 +49,10 @@ public class PotionCombinations : MonoBehaviour
             Orange = false;
             Green = false;
         }
-        else if (potionA == "Blue" && potionB == "Blue")
+        if (potionA == "Blue" && potionB == "Blue")
         {
             mixtures = "Super Blue";
             mixButton.renderer.sharedMaterial.color = Color.blue;
-            SelectedColor = Color.blue;
             Red = false;
             Blue = true;
             Yellow = false;
@@ -61,11 +60,10 @@ public class PotionCombinations : MonoBehaviour
             Orange = false;
             Green = false;
         }
-        else if (potionA == "Yellow" && potionB == "Yellow")
+        if (potionA == "Yellow" && potionB == "Yellow")
         {
             mixtures = "Super Yellow";
             mixButton.renderer.sharedMaterial.color = Color.yellow;
-            SelectedColor = Color.yellow;
             Red = false;
             Blue = false;
             Yellow = true;
@@ -73,11 +71,10 @@ public class PotionCombinations : MonoBehaviour
             Orange = false;
             Green = false;
         }
-        else if (potionA == "Red" && potionB == "Blue")
+        if (potionA == "Red" && potionB == "Blue")
         {
             mixtures = "Purple";
             mixButton.renderer.sharedMaterial.color = Color.magenta;
-            SelectedColor = Color.magenta;
             Red = false;
             Blue = false;
             Yellow = false;
@@ -85,11 +82,10 @@ public class PotionCombinations : MonoBehaviour
             Orange = false;
             Green = false;
         }
-        else if (potionA == "Blue" && potionB == "Red")
+        if (potionA == "Blue" && potionB == "Red")
         {
             mixtures = "Purple";
             mixButton.renderer.sharedMaterial.color = Color.magenta;
-            SelectedColor = Color.magenta;
             Red = false;
             Blue = false;
             Yellow = false;
@@ -97,11 +93,10 @@ public class PotionCombinations : MonoBehaviour
             Orange = false;
             Green = false;
         }
-        else if (potionA == "Red" && potionB == "Yellow")
+        if (potionA == "Red" && potionB == "Yellow")
         {
             mixtures = "Orange";
             mixButton.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
-            SelectedColor = new Color(255, 100, 0, 255);
             Red = false;
             Blue = false;
             Yellow = false;
@@ -109,11 +104,10 @@ public class PotionCombinations : MonoBehaviour
             Orange = true;
             Green = false;
         }
-        else if (potionA == "Yellow" && potionB == "Red")
+        if (potionA == "Yellow" && potionB == "Red")
         {
             mixtures = "Orange";
             mixButton.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
-            SelectedColor = new Color(255, 100, 0, 255);
             Red = false;
             Blue = false;
             Yellow = false;
@@ -121,11 +115,10 @@ public class PotionCombinations : MonoBehaviour
             Orange = true;
             Green = false;
         }
-        else if (potionA == "Blue" && potionB == "Yellow")
+        if (potionA == "Blue" && potionB == "Yellow")
         {
             mixtures = "Green";
             mixButton.renderer.sharedMaterial.color = Color.green;
-            SelectedColor = Color.green;
             Red = false;
             Blue = false;
             Yellow = false;
@@ -133,11 +126,10 @@ public class PotionCombinations : MonoBehaviour
             Orange = false;
             Green = true;
         }
-        else if (potionA == "Yellow" && potionB == "Blue")
+        if (potionA == "Yellow" && potionB == "Blue")
         {
             mixtures = "Green";
             mixButton.renderer.sharedMaterial.color = Color.green;
-            SelectedColor = Color.green;
             Red = false;
             Blue = false;
             Yellow = false;
@@ -158,7 +150,7 @@ public class PotionCombinations : MonoBehaviour
             _playerController.ColorSelected = true;
             potionB = "Red";
             Potion_B_Selected.renderer.sharedMaterial.color = Color.red;
-            checkMixtures();
+           // checkMixtures();
             Debug.Log("mixture complete" + ", " + "potions are:" + " " + "potion A =" + " " + potionA + ", " +
                       "potion B =" + " " + potionB + " -- " + "mixture is:" + " " + mixtures);
             numberOfPotionsSelected = 1;
@@ -183,7 +175,7 @@ public class PotionCombinations : MonoBehaviour
             _playerController.ColorSelected = true;
             potionB = "Blue";
             Potion_B_Selected.renderer.sharedMaterial.color = Color.blue;
-            checkMixtures();
+            //checkMixtures();
             Debug.Log("mixture complete" + ", " + "potions are:" + " " + "potion A =" + " " + potionA + ", " +
                       "potion B =" + " " + potionB + " -- " + "mixture is:" + " " + mixtures);
             numberOfPotionsSelected = 1;
@@ -211,7 +203,7 @@ public class PotionCombinations : MonoBehaviour
             _playerController.ColorSelected = true;
             potionB = "Yellow";
             Potion_B_Selected.renderer.sharedMaterial.color = Color.yellow;
-            checkMixtures();
+            //checkMixtures();
             Debug.Log("mixture complete" + ", " + "potions are:" + " " + "potion A =" + " " + potionA + ", " +
                       "potion B =" + " " + potionB + " -- " + "mixture is:" + " " + mixtures);
             numberOfPotionsSelected = 1;
@@ -228,67 +220,7 @@ public class PotionCombinations : MonoBehaviour
         }
     }
 
-    //CHECK MIXTURES
 
-    private void checkMixtures()
-    {
-        //Debug.Log("Mixture Tested");
-        if (potionA == "Red" && potionB == "Red")
-        {
-            mixtures = "Super Red";
-            mixtureTub.renderer.sharedMaterial.color = Color.red;
-            SelectedColor = Color.red;
-        }
-        if (potionA == "Blue" && potionB == "Blue")
-        {
-            mixtures = "Super Blue";
-            mixtureTub.renderer.sharedMaterial.color = Color.blue;
-            SelectedColor = Color.blue;
-        }
-        if (potionA == "Yellow" && potionB == "Yellow")
-        {
-            mixtures = "Super Yellow";
-            mixtureTub.renderer.sharedMaterial.color = Color.yellow;
-            SelectedColor = Color.yellow;
-        }
-        if (potionA == "Red" && potionB == "Blue")
-        {
-            mixtures = "Purple";
-            mixtureTub.renderer.sharedMaterial.color = Color.magenta;
-            SelectedColor = Color.magenta;
-        }
-        if (potionA == "Blue" && potionB == "Red")
-        {
-            mixtures = "Purple";
-            mixtureTub.renderer.sharedMaterial.color = Color.magenta;
-            SelectedColor = Color.magenta;
-        }
-        if (potionA == "Red" && potionB == "Yellow")
-        {
-            mixtures = "Orange";
-            mixtureTub.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
-            SelectedColor = new Color(255, 100, 0, 255);
-        }
-        if (potionA == "Yellow" && potionB == "Red")
-        {
-            mixtures = "Orange";
-            mixtureTub.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
-            SelectedColor = new Color(255, 100, 0, 255);
-        }
-        if (potionA == "Blue" && potionB == "Yellow")
-        {
-            mixtures = "Green";
-            mixtureTub.renderer.sharedMaterial.color = Color.green;
-            SelectedColor = Color.green;
-        }
-        if (potionA == "Yellow" && potionB == "Blue")
-        {
-            mixtures = "Green";
-            mixtureTub.renderer.sharedMaterial.color = Color.green;
-            SelectedColor = Color.green;
-        }
-
-    }
 
     public void MixButtonPressed()
 
@@ -301,6 +233,7 @@ public class PotionCombinations : MonoBehaviour
             mixtureTub.renderer.sharedMaterial.color = Color.red;
             Potion_A_Selected.renderer.sharedMaterial.color = Color.white;
             Potion_B_Selected.renderer.sharedMaterial.color = Color.white;
+			SelectedColor = Color.red;
 
 
         }
@@ -309,6 +242,7 @@ public class PotionCombinations : MonoBehaviour
             mixtureTub.renderer.sharedMaterial.color = Color.blue;
             Potion_A_Selected.renderer.sharedMaterial.color = Color.white;
             Potion_B_Selected.renderer.sharedMaterial.color = Color.white;
+			SelectedColor = Color.blue;
 
 
         }
@@ -317,6 +251,7 @@ public class PotionCombinations : MonoBehaviour
             mixtureTub.renderer.sharedMaterial.color = Color.yellow;
             Potion_A_Selected.renderer.sharedMaterial.color = Color.white;
             Potion_B_Selected.renderer.sharedMaterial.color = Color.white;
+			SelectedColor = Color.yellow;
 
 
         }
@@ -325,6 +260,7 @@ public class PotionCombinations : MonoBehaviour
             mixtureTub.renderer.sharedMaterial.color = Color.green;
             Potion_A_Selected.renderer.sharedMaterial.color = Color.white;
             Potion_B_Selected.renderer.sharedMaterial.color = Color.white;
+			SelectedColor = Color.green;
 
 
         }
@@ -333,6 +269,7 @@ public class PotionCombinations : MonoBehaviour
             mixtureTub.renderer.sharedMaterial.color = Color.magenta;
             Potion_A_Selected.renderer.sharedMaterial.color = Color.white;
             Potion_B_Selected.renderer.sharedMaterial.color = Color.white;
+			SelectedColor = Color.magenta;
 
 
         }
@@ -341,6 +278,7 @@ public class PotionCombinations : MonoBehaviour
             mixtureTub.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
             Potion_A_Selected.renderer.sharedMaterial.color = Color.white;
             Potion_B_Selected.renderer.sharedMaterial.color = Color.white;
+			SelectedColor = new Color(255, 100, 0 ,255);
 
 
         }
