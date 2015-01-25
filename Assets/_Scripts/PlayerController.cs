@@ -9,34 +9,39 @@ public class PlayerController : MonoBehaviour
     private int _frameCount = 0;
     public GameObject ForcePoint;
     public bool ColorSelected = false;
-
-	void Start () 
-    {
-	
+    public GameObject MixButton;
+    private MixController _mixController;
+    
+	void Start ()
+	{
+	    _mixController = MixButton.GetComponent<MixController>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
 
-	    if (ColorSelected)
+	    if (ColorSelected && _mixController.MixAmount > 0)
 	    {
 	        Vector2 bulletVector = Vector2.zero;
 	        Vector2 forceVector = Vector2.zero;
 	        if (Input.GetKeyDown(KeyCode.DownArrow))
 	        {
+                _mixController.ExpendPotion();
 	            forceVector += new Vector2(0, GunForce);
 	            bulletVector = new Vector2(0, GunForce);
 	            InstantiateBullets(KeyCode.DownArrow, bulletVector, ForcePoint.transform.position);
 	        }
 	        if (Input.GetKeyDown(KeyCode.RightArrow))
 	        {
+                _mixController.ExpendPotion();
 	            forceVector += new Vector2(-GunForce, 0);
 	            bulletVector = new Vector2(-GunForce, 0);
 	            InstantiateBullets(KeyCode.RightArrow, bulletVector, ForcePoint.transform.position);
 	        }
 	        else if (Input.GetKeyDown(KeyCode.LeftArrow))
 	        {
+                _mixController.ExpendPotion();
 	            forceVector += new Vector2(GunForce, 0);
 	            bulletVector = new Vector2(GunForce, 0);
 	            InstantiateBullets(KeyCode.LeftArrow, bulletVector, ForcePoint.transform.position);
@@ -77,6 +82,6 @@ public class PlayerController : MonoBehaviour
         Bullet.GetComponent<BulletController>().forceVector = -forceVector;
         GameObject.Instantiate(Bullet);
         
-        Bullet.rigidbody2D.AddForce(forceVector * 10);
+        Bullet.rigidbody2D.AddForce(forceVector);
     }
 }
