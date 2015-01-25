@@ -13,7 +13,7 @@ public class KillOnCollide : MonoBehaviour {
 
     IEnumerator Die()
     {
-        for (float timer = .5f; timer >= 0; timer -= Time.deltaTime)
+        for (float timer = .25f; timer >= 0; timer -= Time.deltaTime)
             yield return 0;
 
         Destroy(gameObject);
