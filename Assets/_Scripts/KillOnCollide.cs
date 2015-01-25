@@ -17,6 +17,5 @@ public class KillOnCollide : MonoBehaviour {
             yield return 0;
 
         Destroy(gameObject);
-        Debug.Log("Destoryed Bullet");
     }
 }
