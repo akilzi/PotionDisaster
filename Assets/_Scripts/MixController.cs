@@ -67,48 +67,48 @@ public class MixController : MonoBehaviour
         if (Red)
         {
             MixtureTub.renderer.sharedMaterial.color = Color.red;
-            PotionASelected.renderer.sharedMaterial.color = Color.white;
-            PotionBSelected.renderer.sharedMaterial.color = Color.white;
+            //PotionASelected.renderer.sharedMaterial.color = Color.white;
+           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
 
 
         }
         if (Blue)
         {
             MixtureTub.renderer.sharedMaterial.color = Color.blue;
-            PotionASelected.renderer.sharedMaterial.color = Color.white;
-            PotionBSelected.renderer.sharedMaterial.color = Color.white;
+           // PotionASelected.renderer.sharedMaterial.color = Color.white;
+           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
 
 
         }
         if (Yellow)
         {
             MixtureTub.renderer.sharedMaterial.color = Color.yellow;
-            PotionASelected.renderer.sharedMaterial.color = Color.white;
-            PotionBSelected.renderer.sharedMaterial.color = Color.white;
+           // PotionASelected.renderer.sharedMaterial.color = Color.white;
+           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
 
 
         }
         if (Green)
         {
             MixtureTub.renderer.sharedMaterial.color = Color.green;
-            PotionASelected.renderer.sharedMaterial.color = Color.white;
-            PotionBSelected.renderer.sharedMaterial.color = Color.white;
+            //PotionASelected.renderer.sharedMaterial.color = Color.white;
+           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
 
 
         }
         if (Purple)
         {
             MixtureTub.renderer.sharedMaterial.color = Color.magenta;
-            PotionASelected.renderer.sharedMaterial.color = Color.white;
-            PotionBSelected.renderer.sharedMaterial.color = Color.white;
+           // PotionASelected.renderer.sharedMaterial.color = Color.white;
+           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
 
 
         }
         if (Orange)
         {
-            MixtureTub.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
-            PotionASelected.renderer.sharedMaterial.color = Color.white;
-            PotionBSelected.renderer.sharedMaterial.color = Color.white;
+			MixtureTub.renderer.sharedMaterial.color = new Color(1f, .607f, 0f, 1f);
+            //PotionASelected.renderer.sharedMaterial.color = Color.white;
+           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
 
 
         }

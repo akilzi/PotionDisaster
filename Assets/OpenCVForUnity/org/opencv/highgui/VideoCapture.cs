@@ -3,9 +3,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
-
-
-
 namespace OpenCVForUnity
 {
 
@@ -146,6 +143,42 @@ namespace OpenCVForUnity
 						return;
 						#endif
 				}
+
+
+				//
+				// C++: VideoCapture::VideoCapture(const string& filename)
+				//
+		
+				/**
+				 * (Support for Win,Mac,iOS)
+				 * Win Setup
+				 * 1)Download "OpenCV for Windows Version 2.4.9"(http://opencv.org/downloads.html).
+				 * 2)Set Path to "opencv_ffmpeg249.dll"
+				 *   if 32bit, "C:\opencv\build\x86\vc10\bin\".
+				 *   if 64bit, "C:\opencv\build\x64\vc10\bin\".
+ * <p>VideoCapture constructors.</p>
+ *
+ * <p>Note: In C API, when you finished working with video, release
+ * <code>CvCapture</code> structure with <code>cvReleaseCapture()</code>, or use
+ * <code>Ptr<CvCapture></code> that calls <code>cvReleaseCapture()</code>
+ * automatically in the destructor.</p>
+ *
+ * @param filename name of the opened video file (eg. video.avi) or image
+ * sequence (eg. img_%02d.jpg, which will read samples like img_00.jpg,
+ * img_01.jpg, img_02.jpg,...)
+ *
+ * @see <a href="http://docs.opencv.org/modules/highgui/doc/reading_and_writing_images_and_video.html#videocapture-videocapture">org.opencv.highgui.VideoCapture.VideoCapture</a>
+ */
+				public VideoCapture (string filename)
+				{
+						#if UNITY_PRO_LICENSE || ((UNITY_IPHONE) && !UNITY_EDITOR)
+			nativeObj = highgui_VideoCapture_n_VideoCapture(filename);
+			
+			return;
+						#else
+						return;
+						#endif
+				}
 	
 				//
 				// C++: VideoCapture::VideoCapture(int device)
@@ -180,20 +213,46 @@ namespace OpenCVForUnity
 				//
 	
 				/**
- * Returns the specified "VideoCapture" property.
+ * <p>Returns the specified <code>VideoCapture</code> property</p>
  *
- * Note: When querying a property that is not supported by the backend used by
- * the "VideoCapture" class, value 0 is returned.
+ * <p>Note: When querying a property that is not supported by the backend used by
+ * the <code>VideoCapture</code> class, value 0 is returned.</p>
  *
- * @param propId property identifier; it can be one of the following:
- *   * CV_CAP_PROP_FRAME_WIDTH width of the frames in the video stream.
- *   * CV_CAP_PROP_FRAME_HEIGHT height of the frames in the video stream.
+ * @param propId Property identifier. It can be one of the following:
+ * <ul>
+ *   <li> CV_CAP_PROP_POS_MSEC Current position of the video file in
+ * milliseconds or video capture timestamp.
+ *   <li> CV_CAP_PROP_POS_FRAMES 0-based index of the frame to be
+ * decoded/captured next.
+ *   <li> CV_CAP_PROP_POS_AVI_RATIO Relative position of the video file: 0 -
+ * start of the film, 1 - end of the film.
+ *   <li> CV_CAP_PROP_FRAME_WIDTH Width of the frames in the video stream.
+ *   <li> CV_CAP_PROP_FRAME_HEIGHT Height of the frames in the video stream.
+ *   <li> CV_CAP_PROP_FPS Frame rate.
+ *   <li> CV_CAP_PROP_FOURCC 4-character code of codec.
+ *   <li> CV_CAP_PROP_FRAME_COUNT Number of frames in the video file.
+ *   <li> CV_CAP_PROP_FORMAT Format of the Mat objects returned by
+ * <code>retrieve()</code>.
+ *   <li> CV_CAP_PROP_MODE Backend-specific value indicating the current capture
+ * mode.
+ *   <li> CV_CAP_PROP_BRIGHTNESS Brightness of the image (only for cameras).
+ *   <li> CV_CAP_PROP_CONTRAST Contrast of the image (only for cameras).
+ *   <li> CV_CAP_PROP_SATURATION Saturation of the image (only for cameras).
+ *   <li> CV_CAP_PROP_HUE Hue of the image (only for cameras).
+ *   <li> CV_CAP_PROP_GAIN Gain of the image (only for cameras).
+ *   <li> CV_CAP_PROP_EXPOSURE Exposure (only for cameras).
+ *   <li> CV_CAP_PROP_CONVERT_RGB Boolean flags indicating whether images should
+ * be converted to RGB.
+ *   <li> CV_CAP_PROP_WHITE_BALANCE Currently not supported
+ *   <li> CV_CAP_PROP_RECTIFICATION Rectification flag for stereo cameras (note:
+ * only supported by DC1394 v 2.x backend currently)
+ * </ul>
  *
  * @see <a href="http://docs.opencv.org/modules/highgui/doc/reading_and_writing_images_and_video.html#videocapture-get">org.opencv.highgui.VideoCapture.get</a>
  */
 				public double get (int propId)
 				{
-					ThrowIfDisposed ();
+						ThrowIfDisposed ();
 
 						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 			double retVal = highgui_VideoCapture_n_1get(nativeObj, propId);
@@ -206,7 +265,7 @@ namespace OpenCVForUnity
 	
 				public List<Size> getSupportedPreviewSizes ()
 				{
-					ThrowIfDisposed ();
+						ThrowIfDisposed ();
 
 						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 			string[] sizes_str = Marshal.PtrToStringAnsi (highgui_VideoCapture_n_1getSupportedPreviewSizes(nativeObj)).Split(',');//TODO:@check
@@ -252,7 +311,7 @@ namespace OpenCVForUnity
  */
 				public bool grab ()
 				{
-					ThrowIfDisposed ();
+						ThrowIfDisposed ();
 
 						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 			bool retVal = highgui_VideoCapture_n_1grab(nativeObj);
@@ -277,12 +336,47 @@ namespace OpenCVForUnity
  */
 				public bool isOpened ()
 				{
-					ThrowIfDisposed ();
+						ThrowIfDisposed ();
 
 						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 			bool retVal = highgui_VideoCapture_n_1isOpened(nativeObj);
 		
 		return retVal;
+						#else
+						return false;
+						#endif
+				}
+
+				//
+				// C++: bool VideoCapture::open(string filename)
+				//
+		
+				/**
+* (Support for Win,Mac,iOS)
+				 * Win Setup
+				 * 1)Download "OpenCV for Windows Version 2.4.9"(http://opencv.org/downloads.html).
+				 * 2)Set Path to "opencv_ffmpeg249.dll"
+				 *   if 32bit, "C:\opencv\build\x86\vc10\bin\".
+				 *   if 64bit, "C:\opencv\build\x64\vc10\bin\".
+ * <p>Open video file or a capturing device for video capturing</p>
+ *
+ * <p>The methods first call "VideoCapture.release" to close the already opened
+ * file or camera.</p>
+ *
+ * @param filename name of the opened video file (eg. video.avi) or image
+ * sequence (eg. img_%02d.jpg, which will read samples like img_00.jpg,
+ * img_01.jpg, img_02.jpg,...)
+ *
+ * @see <a href="http://docs.opencv.org/modules/highgui/doc/reading_and_writing_images_and_video.html#videocapture-open">org.opencv.highgui.VideoCapture.open</a>
+ */
+				public bool open (string filename)
+				{
+						ThrowIfDisposed ();
+			
+						#if UNITY_PRO_LICENSE || ((UNITY_IPHONE) && !UNITY_EDITOR)
+			bool retVal = highgui_VideoCapture_n_open(nativeObj, filename);
+			
+			return retVal;
 						#else
 						return false;
 						#endif
@@ -304,7 +398,7 @@ namespace OpenCVForUnity
  */
 				public bool open (int device)
 				{
-					ThrowIfDisposed ();
+						ThrowIfDisposed ();
 
 						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 			bool retVal = highgui_VideoCapture_n_1open__JI(nativeObj, device);
@@ -340,7 +434,7 @@ namespace OpenCVForUnity
  */
 				public bool read (Mat image)
 				{
-					ThrowIfDisposed ();
+						ThrowIfDisposed ();
 
 #if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 		
@@ -369,7 +463,7 @@ namespace OpenCVForUnity
  */
 				public void release ()
 				{
-					ThrowIfDisposed ();
+						ThrowIfDisposed ();
 
 						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 			highgui_VideoCapture_n_1release(nativeObj);
@@ -404,8 +498,9 @@ namespace OpenCVForUnity
  */
 				public bool retrieve (Mat image, int channel)
 				{
-if (image != null)image.ThrowIfDisposed ();
-					ThrowIfDisposed ();
+						if (image != null)
+								image.ThrowIfDisposed ();
+						ThrowIfDisposed ();
 
 						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 			bool retVal = highgui_VideoCapture_n_1retrieve__JJI(nativeObj, image.nativeObj, channel);
@@ -435,8 +530,9 @@ if (image != null)image.ThrowIfDisposed ();
  */
 				public bool retrieve (Mat image)
 				{
-if (image != null)image.ThrowIfDisposed ();
-					ThrowIfDisposed ();
+						if (image != null)
+								image.ThrowIfDisposed ();
+						ThrowIfDisposed ();
 
 						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 			bool retVal = highgui_VideoCapture_n_1retrieve__JJ(nativeObj, image.nativeObj);
@@ -452,18 +548,44 @@ if (image != null)image.ThrowIfDisposed ();
 				//
 	
 				/**
- * Sets a property in the "VideoCapture".
+ * <p>Sets a property in the <code>VideoCapture</code>.</p>
  *
- * @param propId property identifier; it can be one of the following:
- *   * CV_CAP_PROP_FRAME_WIDTH width of the frames in the video stream.
- *   * CV_CAP_PROP_FRAME_HEIGHT height of the frames in the video stream.
- * @param value value of the property.
+ * @param propId Property identifier. It can be one of the following:
+ * <ul>
+ *   <li> CV_CAP_PROP_POS_MSEC Current position of the video file in
+ * milliseconds.
+ *   <li> CV_CAP_PROP_POS_FRAMES 0-based index of the frame to be
+ * decoded/captured next.
+ *   <li> CV_CAP_PROP_POS_AVI_RATIO Relative position of the video file: 0 -
+ * start of the film, 1 - end of the film.
+ *   <li> CV_CAP_PROP_FRAME_WIDTH Width of the frames in the video stream.
+ *   <li> CV_CAP_PROP_FRAME_HEIGHT Height of the frames in the video stream.
+ *   <li> CV_CAP_PROP_FPS Frame rate.
+ *   <li> CV_CAP_PROP_FOURCC 4-character code of codec.
+ *   <li> CV_CAP_PROP_FRAME_COUNT Number of frames in the video file.
+ *   <li> CV_CAP_PROP_FORMAT Format of the Mat objects returned by
+ * <code>retrieve()</code>.
+ *   <li> CV_CAP_PROP_MODE Backend-specific value indicating the current capture
+ * mode.
+ *   <li> CV_CAP_PROP_BRIGHTNESS Brightness of the image (only for cameras).
+ *   <li> CV_CAP_PROP_CONTRAST Contrast of the image (only for cameras).
+ *   <li> CV_CAP_PROP_SATURATION Saturation of the image (only for cameras).
+ *   <li> CV_CAP_PROP_HUE Hue of the image (only for cameras).
+ *   <li> CV_CAP_PROP_GAIN Gain of the image (only for cameras).
+ *   <li> CV_CAP_PROP_EXPOSURE Exposure (only for cameras).
+ *   <li> CV_CAP_PROP_CONVERT_RGB Boolean flags indicating whether images should
+ * be converted to RGB.
+ *   <li> CV_CAP_PROP_WHITE_BALANCE Currently unsupported
+ *   <li> CV_CAP_PROP_RECTIFICATION Rectification flag for stereo cameras (note:
+ * only supported by DC1394 v 2.x backend currently)
+ * </ul>
+ * @param value Value of the property.
  *
  * @see <a href="http://docs.opencv.org/modules/highgui/doc/reading_and_writing_images_and_video.html#videocapture-set">org.opencv.highgui.VideoCapture.set</a>
  */
 				public bool set (int propId, double value)
 				{
-					ThrowIfDisposed ();
+						ThrowIfDisposed ();
 					
 						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
 			bool retVal = highgui_VideoCapture_n_1set(nativeObj, propId, value);
@@ -486,9 +608,9 @@ if (image != null)image.ThrowIfDisposed ();
 		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr highgui_VideoCapture_n_1VideoCapture__();
 		
-//		// C++: VideoCapture::VideoCapture(string filename)
-//		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-//		private static extern IntPtr n_VideoCapture(string filename);
+		// C++: VideoCapture::VideoCapture(string filename)
+		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr highgui_VideoCapture_n_VideoCapture (string filename);
 		
 		// C++: VideoCapture::VideoCapture(int device)
 		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
@@ -506,9 +628,9 @@ if (image != null)image.ThrowIfDisposed ();
 		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
 		private static extern bool highgui_VideoCapture_n_1isOpened(IntPtr nativeObj);
 		
-//		// C++: bool VideoCapture::open(string filename)
-//		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
-//		private static extern bool n_open(IntPtr nativeObj, string filename);
+		// C++: bool VideoCapture::open(string filename)
+		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+		private static extern bool highgui_VideoCapture_n_open (IntPtr nativeObj, string filename);
 		
 		// C++: bool VideoCapture::open(int device)
 		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
@@ -541,63 +663,63 @@ if (image != null)image.ThrowIfDisposed ();
 		private static extern void highgui_VideoCapture_n_1delete(IntPtr nativeObj);
 
 #else
-		// C++: VideoCapture::VideoCapture()
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr highgui_VideoCapture_n_1VideoCapture__();
+				// C++: VideoCapture::VideoCapture()
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern IntPtr highgui_VideoCapture_n_1VideoCapture__ ();
 		
-		//	// C++: VideoCapture::VideoCapture(string filename)
-		//	[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		//		private static extern IntPtr n_VideoCapture(string filename);
+				// C++: VideoCapture::VideoCapture(string filename)
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern IntPtr highgui_VideoCapture_n_VideoCapture (string filename);
 		
-		// C++: VideoCapture::VideoCapture(int device)
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr highgui_VideoCapture_n_1VideoCapture__I(int device);
+				// C++: VideoCapture::VideoCapture(int device)
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern IntPtr highgui_VideoCapture_n_1VideoCapture__I (int device);
 		
-		// C++: double VideoCapture::get(int propId)
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern double highgui_VideoCapture_n_1get(IntPtr nativeObj, int propId);
+				// C++: double VideoCapture::get(int propId)
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern double highgui_VideoCapture_n_1get (IntPtr nativeObj, int propId);
 		
-		// C++: bool VideoCapture::grab()
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern bool highgui_VideoCapture_n_1grab(IntPtr nativeObj);
+				// C++: bool VideoCapture::grab()
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern bool highgui_VideoCapture_n_1grab (IntPtr nativeObj);
 		
-		// C++: bool VideoCapture::isOpened()
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern bool highgui_VideoCapture_n_1isOpened(IntPtr nativeObj);
+				// C++: bool VideoCapture::isOpened()
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern bool highgui_VideoCapture_n_1isOpened (IntPtr nativeObj);
 		
-		//	// C++: bool VideoCapture::open(string filename)
-		//		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		//		private static extern bool n_open(IntPtr nativeObj, string filename);
+				// C++: bool VideoCapture::open(string filename)
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern bool highgui_VideoCapture_n_open (IntPtr nativeObj, string filename);
 		
-		// C++: bool VideoCapture::open(int device)
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern bool highgui_VideoCapture_n_1open__JI(IntPtr nativeObj, int device);
+				// C++: bool VideoCapture::open(int device)
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern bool highgui_VideoCapture_n_1open__JI (IntPtr nativeObj, int device);
 		
-		// C++: bool VideoCapture::read(Mat image)
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern bool highgui_VideoCapture_n_1read(IntPtr nativeObj, IntPtr image_nativeObj);
+				// C++: bool VideoCapture::read(Mat image)
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern bool highgui_VideoCapture_n_1read (IntPtr nativeObj, IntPtr image_nativeObj);
 		
-		// C++: void VideoCapture::release()
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void highgui_VideoCapture_n_1release(IntPtr nativeObj);
+				// C++: void VideoCapture::release()
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern void highgui_VideoCapture_n_1release (IntPtr nativeObj);
 		
-		// C++: bool VideoCapture::retrieve(Mat image, int channel = 0)
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern bool highgui_VideoCapture_n_1retrieve__JJI(IntPtr nativeObj, IntPtr image_nativeObj, int channel);
+				// C++: bool VideoCapture::retrieve(Mat image, int channel = 0)
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern bool highgui_VideoCapture_n_1retrieve__JJI (IntPtr nativeObj, IntPtr image_nativeObj, int channel);
 		
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern bool highgui_VideoCapture_n_1retrieve__JJ(IntPtr nativeObj, IntPtr image_nativeObj);
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern bool highgui_VideoCapture_n_1retrieve__JJ (IntPtr nativeObj, IntPtr image_nativeObj);
 		
-		// C++: bool VideoCapture::set(int propId, double value)
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern bool highgui_VideoCapture_n_1set(IntPtr nativeObj, int propId, double value);
+				// C++: bool VideoCapture::set(int propId, double value)
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern bool highgui_VideoCapture_n_1set (IntPtr nativeObj, int propId, double value);
 		
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern IntPtr highgui_VideoCapture_n_1getSupportedPreviewSizes(IntPtr nativeObj);
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern IntPtr highgui_VideoCapture_n_1getSupportedPreviewSizes (IntPtr nativeObj);
 		
-		// native support for java finalize()
-		[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
-		private static extern void highgui_VideoCapture_n_1delete(IntPtr nativeObj);
+				// native support for java finalize()
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern void highgui_VideoCapture_n_1delete (IntPtr nativeObj);
 		#endif
 		}
 }

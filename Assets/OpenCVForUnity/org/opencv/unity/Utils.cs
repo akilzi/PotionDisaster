@@ -7,19 +7,153 @@ namespace OpenCVForUnity
 {
 		public static class Utils
 		{
-	
-				
 
+
+				/**
+     * Copy OpenCV Mat Data to the Pixel Data IntPtr.
+     * <p>
+     * <br>This function copy the OpenCV Mat Data to the Pixel Data IntPtr.
+     * <br>The Pixel Data has to be of the same byte size as the input Mat Data ([total() * elemSize()] byte).
+     * <br>Because this method doesn't check bounds, is faster than Mat.get().
+     *
+     * @param mat The input Mat object
+     * @param intPtr The Pixel Data has to be of the same byte size as the input Mat Data ([total() * elemSize()] byte).
+	 */
+				public static void copyFromMat (Mat mat, IntPtr intPtr)
+				{
+						if (mat != null)
+								mat.ThrowIfDisposed ();
+			
+						if (mat == null)
+								throw new ArgumentNullException ("mat == null");
+						if (intPtr == IntPtr.Zero)
+								throw new ArgumentNullException ("intPtr == IntPtr.Zero");
+			
+			
+						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
+			
+			OpenCVForUnity_MatDataToByteArray(mat.nativeObj, intPtr);
+			
+						#else
+						return;
+						#endif
+			
+			
+				}
+		
+				/**
+     * Copy the Pixel Data IntPtr to OpenCV Mat Data.
+     * <p>
+     * This function copy the Pixel Data IntPtr to the OpenCV Mat Data.
+     * <br>The output Mat object has to be of the same byte size as the Pixel Data ([total() * elemSize()] byte).
+     * <br>Because this method doesn't check bounds, is faster than Mat.put().
+     * 
+     * @param intPtr The Pixel Data IntPtr
+     * @param mat The output Mat object has to be of the same byte size as the Pixel Data ([total() * elemSize()] byte).
+     */
+				public static void copyToMat (IntPtr intPtr, Mat mat)
+				{
+						if (mat != null)
+								mat.ThrowIfDisposed ();
+			
+						if (intPtr == IntPtr.Zero)
+								throw new ArgumentNullException ("intPtr == IntPtr.Zero");
+						if (mat == null)
+								throw new ArgumentNullException ("mat == null");
+			
+			
+						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
+			
+			
+			OpenCVForUnity_ByteArrayToMatData( intPtr, mat.nativeObj);
+			
+						#else
+						return;
+						#endif
+			
+				}
+
+				/**
+     * Copy OpenCV Mat Data to the Pixel Data Array.
+     * <p>
+     * <br>This function copy the OpenCV Mat Data to the Pixel Data Array.
+     * <br>The Pixel Data Array has to be of the same byte size as the input Mat Data ([total() * elemSize()] byte).
+     * <br>Because this method doesn't check bounds, is faster than Mat.get().
+     *
+     * @param mat The input Mat object
+     * @param array The Pixel Data Array has to be of the same byte size as the input Mat Data ([total() * elemSize()] byte).
+	 */
+				public static void copyFromMat<T> (Mat mat, IList<T> array)
+				{
+						if (mat != null)
+								mat.ThrowIfDisposed ();
+			
+						if (mat == null)
+								throw new ArgumentNullException ("mat == null");
+						if (array == null)
+								throw new ArgumentNullException ("array == null");
+			
+			
+						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
+			GCHandle arrayHandle = GCHandle.Alloc(array,GCHandleType.Pinned);
+
+			OpenCVForUnity_MatDataToByteArray(mat.nativeObj, arrayHandle.AddrOfPinnedObject());
+
+			arrayHandle.Free ();
+						#else
+						return;
+						#endif
+			
+			
+				}
+		
+				/**
+     * Copy the Pixel Data Array to OpenCV Mat Data.
+     * <p>
+     * This function copy the Pixel Data Array to the OpenCV Mat Data.
+     * <br>The output Mat object has to be of the same byte size as the Pixel Data Array ([total() * elemSize()] byte).
+     * <br>Because this method doesn't check bounds, is faster than Mat.put().
+     * 
+     * @param array The Pixel Data Array
+     * @param mat The output Mat object has to be of the same byte size as the Pixel Data Array ([total() * elemSize()] byte).
+     */
+				public static void copyToMat<T> (IList<T> array, Mat mat)
+				{
+						if (mat != null)
+								mat.ThrowIfDisposed ();
+			
+						if (array == null)
+								throw new ArgumentNullException ("array == null");
+						if (mat == null)
+								throw new ArgumentNullException ("mat == null");
+			
+			
+						#if UNITY_PRO_LICENSE || ((UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR)
+			GCHandle arrayHandle = GCHandle.Alloc(array,GCHandleType.Pinned);
+			
+			OpenCVForUnity_ByteArrayToMatData( arrayHandle.AddrOfPinnedObject(), mat.nativeObj);
+
+			arrayHandle.Free ();
+
+						#else
+						return;
+						#endif
+			
+				}
+		
+		
+		
+		
 				/**
      * Converts OpenCV Mat to Unity Texture2D.
      * <p>
-     * <br>This function converts an image in the OpenCV Mat representation to the Unity Texture2D.
+     * <br>This function converts the OpenCV Mat to the Unity Texture2D.
      * <br>The input Mat object has to be of the types 'CV_8UC4' (RGBA) , 'CV_8UC3' (RGB) or 'CV_8UC1' (GRAY).
      * <br>The output Texture2D object has to be of the TextureFormat 'RGBA32' or 'ARGB32'.(SetPixels32() must function.)
-     * <br>The output Texture2D object has to be of the same size as the input Mat'.
+     * <br>The output Texture2D object has to be of the same size as the input Mat'(width * height).
      *
      * @param mat The input Mat object has to be of the types 'CV_8UC4' (RGBA) , 'CV_8UC3' (RGB) or 'CV_8UC1' (GRAY).
-     * @param The output Texture2D object has to be of the TextureFormat 'RGBA32' or 'ARGB32'.(SetPixels32() must function.)texture2D The output Texture2D object has to be of the same size as the input Mat'.
+     * @param The output Texture2D object has to be of the TextureFormat 'RGBA32' or 'ARGB32'.(SetPixels32() must function.)texture2D The output Texture2D object has to be of the same size as the input Mat'(width * height).
      * @param bufferColors Optional array to receive pixel data.
      * You can optionally pass in an array of Color32s to use in colors to avoid allocating new memory each frame.
      * The array needs to be initialized to a length matching width * height of the texture.(http://docs.unity3d.com/ScriptReference/WebCamTexture.GetPixels32.html)
@@ -133,11 +267,11 @@ namespace OpenCVForUnity
      * Converts Unity Texture2D to OpenCV Mat.
      * <p>
      * This function converts an Unity Texture2D image to the OpenCV Mat.
-     * <br>The output Mat object has to be of the same size as the input Texture2D'.
+     * <br>The output Mat object has to be of the same size as the input Texture2D'(width * height).
      * The output Mat object has to be of the types 'CV_8UC4' (RGBA) , 'CV_8UC3' (RGB) or 'CV_8UC1' (GRAY).
      * 
      * @param texture2D
-     * @param mat The output Mat object has to be of the same size as the input Texture2D'.
+     * @param mat The output Mat object has to be of the same size as the input Texture2D'(width * height).
      * The output Mat object has to be of the types 'CV_8UC4' (RGBA) , 'CV_8UC3' (RGB) or 'CV_8UC1' (GRAY).
      */
 				public static void texture2DToMat (Texture2D texture2D, Mat mat)
@@ -202,11 +336,11 @@ namespace OpenCVForUnity
      * Converts Unity WebCamTexture to OpenCV Mat.
      * <p>
      * This function converts an Unity WebCamTexture image to the OpenCV Mat.
-     * <br>The output Mat object has to be of the same size as the input WebCamTexture'.
+     * <br>The output Mat object has to be of the same size as the input WebCamTexture'(width * height).
      * The output Mat object has to be of the types 'CV_8UC4' (RGBA) , 'CV_8UC3' (RGB) or 'CV_8UC1' (GRAY).
      * 
      * @param webcamTexture
-     * @param mat The output Mat object has to be of the same size as the input WebCamTexture'.
+     * @param mat The output Mat object has to be of the same size as the input WebCamTexture'(width * height).
      * The output Mat object has to be of the types 'CV_8UC4' (RGBA) , 'CV_8UC3' (RGB) or 'CV_8UC1' (GRAY).
      * @param bufferColors Optional array to receive pixel data.
      * You can optionally pass in an array of Color32s to use in colors to avoid allocating new memory each frame.
@@ -351,6 +485,12 @@ namespace OpenCVForUnity
 		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void OpenCVForUnity_TextureToMat (IntPtr textureColors, IntPtr Mat);
 
+		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void OpenCVForUnity_MatDataToByteArray (IntPtr mat, IntPtr byteArray);
+		
+		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl)]
+		private static extern void OpenCVForUnity_ByteArrayToMatData (IntPtr byteArray, IntPtr Mat);
+
 #else
 				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
 				private static extern IntPtr OpenCVForUnity_GetFilePath (string filename);
@@ -360,6 +500,12 @@ namespace OpenCVForUnity
 		
 				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
 				private static extern void OpenCVForUnity_TextureToMat (IntPtr textureColors, IntPtr Mat);
+
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern void OpenCVForUnity_MatDataToByteArray (IntPtr mat, IntPtr byteArray);
+		
+				[DllImport("opencvforunity", CallingConvention = CallingConvention.Cdecl)]
+				private static extern void OpenCVForUnity_ByteArrayToMatData (IntPtr byteArray, IntPtr Mat);
 		#endif
 		}
 }

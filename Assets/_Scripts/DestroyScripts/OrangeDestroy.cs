@@ -18,7 +18,7 @@ public class OrangeDestroy: MonoBehaviour {
 	
 	public void OnCollisionEnter2D(Collision2D node)
 	{
-		if(Bullet.renderer.sharedMaterial.color == Color.green)
+		if(Bullet.renderer.sharedMaterial.color == new Color(1f, .607f, 0f, 1f));
 		{
 		    if (node.gameObject.tag == "Bullet")
 		    {

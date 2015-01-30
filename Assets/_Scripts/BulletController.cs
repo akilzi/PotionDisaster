@@ -27,12 +27,12 @@ public class BulletController : MonoBehaviour
 
 	    if (gameObject.activeSelf)
 	    {
-            //if (!float.IsNaN(forceVector.x))
-            //{
-            //    rigidbody2D.AddForce(forceVector);
-            //}
+            if (!float.IsNaN(forceVector.x))
+            {
+                rigidbody2D.AddForce(forceVector);
+            }
 
-            //forceVector = shortenLength(forceVector, 1000);
+            forceVector = shortenLength(forceVector, 100);
 	    }
     }
 
@@ -45,7 +45,7 @@ public class BulletController : MonoBehaviour
 
     IEnumerator TTL()
     {
-        for (float timer = 3f; timer >= 0; timer -= Time.deltaTime)
+        for (float timer = .6f; timer >= 0; timer -= Time.deltaTime)
             yield return 0;
 
         Destroy(gameObject);

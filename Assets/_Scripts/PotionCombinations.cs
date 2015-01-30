@@ -78,15 +78,15 @@ public class PotionCombinations : MonoBehaviour
         else if (potionA == "Red" && potionB == "Yellow")
         {
             mixtures = "Orange";
-            MixButton.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
-            SelectedColor = new Color(255, 100, 0, 255);
+			MixButton.renderer.material.color = new Color(1f, .607f, 0f, 1f);
+			SelectedColor = new Color(1f, .607f, 0f, 1f);
             _mixController.Orange = true;
         }
         else if (potionA == "Yellow" && potionB == "Red")
         {
             mixtures = "Orange";
-            MixButton.renderer.sharedMaterial.color = new Color(255, 100, 0, 255);
-            SelectedColor = new Color(255, 100, 0, 255);
+			MixButton.renderer.sharedMaterial.color = new Color(1f, .607f, 0f, 1f);
+			SelectedColor = new Color(1f, .607f, 0f, 1f);
             _mixController.Orange = true;
         }
         else if (potionA == "Blue" && potionB == "Yellow")
