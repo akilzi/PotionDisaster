@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MixController : MonoBehaviour
+public class MixController : Photon.MonoBehaviour
 {
     public GameObject MixtureTub;
     public GameObject PotionASelected;

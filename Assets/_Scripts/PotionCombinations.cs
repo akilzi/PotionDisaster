@@ -15,7 +15,13 @@ public class PotionCombinations : MonoBehaviour
     private PlayerController _playerController;
     private MixController _mixController;
 
-    
+    private struct PotionCombinationStruct
+    {
+        public string PotionA;
+        public string PotionB;
+        public EntityColor MixedColor;
+
+    };
 
     // Use this for initialization
     private void Start()
@@ -166,5 +172,26 @@ public class PotionCombinations : MonoBehaviour
         }
     }
 
-    
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            PotionCombinationStruct psc = new PotionCombinationStruct
+            {
+                PotionA = potionA,
+                PotionB = potionB,
+                MixedColor = MixedColor
+            };
+
+            stream.SendNext(psc);
+        }
+        else
+        {
+            PotionCombinationStruct psc = (PotionCombinationStruct)stream.ReceiveNext();
+
+            potionA = psc.PotionA;
+            potionB = psc.PotionB;
+            MixedColor = psc.MixedColor;
+        }
+    }
 }
