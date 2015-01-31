@@ -80,7 +80,7 @@ public class MonsterScript : MonoBehaviour
 
     IEnumerator EnemySpawner()
     {
-        while (_gameController.GameState == GameState.PLAYING && _characterSelect.isGunner)
+        while (_gameController.GameState == GameState.PLAYING && _gameController.CharacterType == CharacterOptions.GUNNER)
         {
             for (float timer = _timerLength; timer >= 0; timer -= Time.deltaTime)
                 yield return 0;
