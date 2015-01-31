@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 	public GameObject GameManager;
 	public CharacterSelect CharSelect;
     
+    
 	void Start ()
 	{
 	    _mixController = MixButton.GetComponent<MixController>();
@@ -26,13 +27,13 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (ColorSelected && _mixController.MixAmount > 0 && GameManager)// add && CharSelect.isGunner
+		if (ColorSelected && _mixController.MixAmount > 0 && GameManager && CharSelect.isGunner)
 		{
 			
 			Vector2 bulletVector = Vector2.zero;
 			Vector2 forceVector = Vector2.zero;
 
-			if (Input.GetKey(KeyCode.UpArrow touch))
+			if (Input.GetKey(KeyCode.UpArrow))
 			{
 				_mixController.ExpendPotion();
 				forceVector += new Vector2(1, GunForce);
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-void InstantiateBullets(KeyCode keyPress, Vector2 force, Vector3 position)
+    void InstantiateBullets(KeyCode keyPress, Vector2 force, Vector3 position)
     {
         var bForce = Vector2.zero;
         switch (keyPress)

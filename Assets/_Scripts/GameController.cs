@@ -42,6 +42,10 @@ public class GameController : MonoBehaviour
         switch (GameState)
         {
             case GameState.STARTING:
+                GameState = GameState.INITIALIZING;
+                StartNetworking();
+                break;
+            case GameState.INITIALIZING:
                 GameState = GameState.PLAYING;
                 Application.LoadLevel("labScene");
                 break;
@@ -62,5 +66,10 @@ public class GameController : MonoBehaviour
     private void ChangeState(GameState nextState)
     {
         GameState = nextState;
+    }
+
+    private void StartNetworking()
+    {
+        
     }
 }
