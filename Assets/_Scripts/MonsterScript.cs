@@ -28,7 +28,7 @@ public class MonsterScript : MonoBehaviour {
         GameManager = GameObject.FindGameObjectWithTag("GameController");
         _gameController = GameManager.GetComponent<GameController>();
         StartCoroutine(EnemySpawner());
-		StartCoroutine (EnemyReplicator());
+        //StartCoroutine(EnemyReplicator());
 	}
 	
 	// Update is called once per frame

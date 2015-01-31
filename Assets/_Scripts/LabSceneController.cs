@@ -17,8 +17,6 @@ public class LabSceneController : MonoBehaviour
             GameObject.FindGameObjectWithTag("YellowButton").GetComponent<Button>().enabled = false;
             GameObject.FindGameObjectWithTag("MixButton").GetComponent<Button>().enabled = false;
 	    }
-
-	    GameObject monster = PhotonNetwork.Instantiate("BlueIce_WeakToRed", Vector3.zero, Quaternion.identity, 0);
 	}
 	
 	// Update is called once per frame
