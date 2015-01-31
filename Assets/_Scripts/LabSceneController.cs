@@ -10,7 +10,7 @@ public class LabSceneController : MonoBehaviour
 	{
 	    _gameController = GameObject.Find("GameManager").GetComponent<GameController>();
 
-	    if (_gameController.SelectedCharacter == CharacterOptions.GUNNER)
+	    if (_gameController.CharacterType == CharacterOptions.GUNNER)
 	    {
 	        GameObject.FindGameObjectWithTag("RedButton").GetComponent<Button>().enabled = false;
             GameObject.FindGameObjectWithTag("BlueButton").GetComponent<Button>().enabled = false;

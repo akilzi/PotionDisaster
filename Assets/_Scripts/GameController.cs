@@ -32,7 +32,7 @@ public class GameController : Photon.MonoBehaviour
 	
     public static GameController Instance;
     public GameState GameState;
-    public CharacterOptions SelectedCharacter;
+    public CharacterOptions CharacterType;
 
     private int _enemyCount = 0;
 
