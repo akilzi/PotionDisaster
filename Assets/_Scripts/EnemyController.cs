@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _gameController = GameObject.Find("GameManager").GetComponent<GameController>();
     }
 
     public void OnCollisionEnter2D(Collision2D node)

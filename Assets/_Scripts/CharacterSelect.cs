@@ -7,6 +7,7 @@ public class CharacterSelect : Photon.MonoBehaviour {
 	public bool isChemist = false;
     private bool isReady = false;
     private GameController _gameManager;
+    
 
 	void Start()
 	{

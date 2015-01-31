@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class LabSceneController : MonoBehaviour
 {
 
-    private GameObject _characterSelect;
+    private GameController _gameController;
 	void Start ()
 	{
-	    _characterSelect = GameObject.Find("CharacterSelect");
+	    _gameController = GameObject.Find("GameManager").GetComponent<GameController>();
 
-	    if (_characterSelect.GetComponent<CharacterSelect>().isGunner)
+	    if (_gameController.SelectedCharacter == CharacterOptions.GUNNER)
 	    {
 	        GameObject.FindGameObjectWithTag("RedButton").GetComponent<Button>().enabled = false;
             GameObject.FindGameObjectWithTag("BlueButton").GetComponent<Button>().enabled = false;
