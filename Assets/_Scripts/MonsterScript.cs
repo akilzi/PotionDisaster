@@ -13,6 +13,7 @@ public class MonsterScript : MonoBehaviour {
 	private float _DuptimerLength = 1f;
     public List<GameObject> SpawnedEnemies;
     private CountManager _countManager;
+    private CharacterSelect _characterSelect;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class MonsterScript : MonoBehaviour {
 	void Start ()
 	{
         _countManager = CountManager.GetComponent<CountManager>();
+	    _characterSelect = GameObject.Find("CharacterSelect").GetComponent<CharacterSelect>();
         GameManager = GameObject.FindGameObjectWithTag("GameController");
         _gameController = GameManager.GetComponent<GameController>();
         StartCoroutine(EnemySpawner());
@@ -79,28 +81,28 @@ public class MonsterScript : MonoBehaviour {
 
     IEnumerator EnemySpawner()
     {
-        while (_gameController.GameState == GameState.PLAYING)
+        while (_gameController.GameState == GameState.PLAYING && _characterSelect.isGunner)
         {
             for (float timer = _timerLength; timer >= 0; timer -= Time.deltaTime)
                 yield return 0;
 
             //Select Random Enemy
-            GameObject randomEnemy = EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)];
+            string randomEnemyName = EnemyPrefabs[Random.Range(0, EnemyPrefabs.Length)].name;
 
             //Set Random Location In Camera For Enemy To Spawn
             float y = Random.Range(5.9f, 6f);
             float x = Random.Range(-7f, 7f);
-            randomEnemy.transform.position = new Vector3(x, y);
-            Instantiate(randomEnemy);
+            GameObject randomEnemy = PhotonNetwork.Instantiate(randomEnemyName, new Vector3(x, y), Quaternion.identity,
+                0);
             CountManager.GetComponent<CountManager>().addEnemy(randomEnemy);
 
-            randomEnemy.transform.position = new Vector3(x, y);
-            Instantiate(randomEnemy);
+            randomEnemy = PhotonNetwork.Instantiate(randomEnemyName, new Vector3(x, y), Quaternion.identity,
+                0);
             CountManager.GetComponent<CountManager>().addEnemy(randomEnemy);
 
 
-            randomEnemy.transform.position = new Vector3(x, y);
-            Instantiate(randomEnemy);
+            randomEnemy = PhotonNetwork.Instantiate(randomEnemyName, new Vector3(x, y), Quaternion.identity,
+                0);
             CountManager.GetComponent<CountManager>().addEnemy(randomEnemy);
         }
     }

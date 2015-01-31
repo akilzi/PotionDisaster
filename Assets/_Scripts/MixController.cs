@@ -17,9 +17,9 @@ public class MixController : MonoBehaviour
     public Sprite Sprite75;
     public Sprite Sprite100;
     public int PotionGain = 25;
-    public int PotionCost = 1;
+    public int PotionCost = 0;
 
-    public int MixAmount = 0; //Can go to 100
+    public int MixAmount = 100; //Can go to 100
 	void Start () 
     {
         MixtureTub.renderer.sharedMaterial.color = Color.white;
