@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : Photon.MonoBehaviour
 {
 
     public GameObject coins;

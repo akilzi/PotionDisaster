@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class groupTogether : MonoBehaviour {
+public class groupTogether : Photon.MonoBehaviour {
 
 	public Transform TargetObject;
 	private float speed;

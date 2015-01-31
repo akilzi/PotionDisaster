@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PotionCombinations : MonoBehaviour
+public class PotionCombinations : Photon.MonoBehaviour
 {
     public string potionA;
     public string potionB;

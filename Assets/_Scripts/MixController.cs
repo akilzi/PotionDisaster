@@ -108,4 +108,6 @@ public class MixController : Photon.MonoBehaviour
             MixAmount = 0;
         }
     }
+
+    
 }

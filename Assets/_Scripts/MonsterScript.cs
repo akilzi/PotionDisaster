@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterScript : MonoBehaviour
+public class MonsterScript : Photon.MonoBehaviour
 {
 
     //public GameObject ThisIsMe;

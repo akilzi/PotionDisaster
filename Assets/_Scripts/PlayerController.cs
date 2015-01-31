@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Photon.MonoBehaviour
 {
 
 	public GameObject Bullet;
