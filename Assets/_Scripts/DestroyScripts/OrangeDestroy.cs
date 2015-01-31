@@ -5,6 +5,7 @@ public class OrangeDestroy: MonoBehaviour {
 	
 	public GameObject Bullet;
 	public GameObject CountManager;
+	public GameObject coins;
 	
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,8 @@ public class OrangeDestroy: MonoBehaviour {
 		    if (node.gameObject.tag == "Bullet")
 		    {
 		        CountManager.GetComponent<CountManager>().removeEnemy(gameObject);
-		        Destroy(gameObject);
+				Instantiate(coins, transform.position, transform.rotation);
+				Destroy(gameObject);
 		    }
 		    //instantiate particle effect
 		}

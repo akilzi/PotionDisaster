@@ -12,8 +12,7 @@ public enum GameState
 
 public class GameController : MonoBehaviour
 {
-
-
+	
     public static GameController Instance;
     public GameState GameState;
 

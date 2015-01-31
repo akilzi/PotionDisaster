@@ -12,30 +12,33 @@ public class PlayerController : MonoBehaviour
     private MixController _mixController;
 	private float randomNumber;
 	public GameObject particleEffect;
-
-
-
+	public GameObject GameManager;
+	public CharacterSelect CharSelect;
     
 	void Start ()
 	{
 	    _mixController = MixButton.GetComponent<MixController>();
 		randomNumber = Random.Range (-360, 360);
-
+		GameManager = GameObject.FindGameObjectWithTag("GameController");
+		CharSelect = GameObject.FindObjectOfType<CharacterSelect> ();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		
-		if (ColorSelected && _mixController.MixAmount > 0)
+		if (ColorSelected && _mixController.MixAmount > 0 && GameManager)// add && CharSelect.isGunner
 		{
 			
 			Vector2 bulletVector = Vector2.zero;
 			Vector2 forceVector = Vector2.zero;
 
-			if (Input.GetKey(KeyCode.UpArrow))
+			if (Input.GetKey(KeyCode.UpArrow touch))
 			{
-				transform.rotation = Quaternion.Lerp(transform.rotation, new Quaternion(transform.rotation.x, transform.rotation.y, 0, transform.rotation.w), GunForce/2 * Time.deltaTime);
+				_mixController.ExpendPotion();
+				forceVector += new Vector2(1, GunForce);
+				bulletVector = new Vector2(100, GunForce);//effects bullet velocity
+				particleEffect.particleSystem.Play();
+				InstantiateBullets(KeyCode.UpArrow, bulletVector, ForcePoint.transform.position);
 			}
 
 
@@ -86,7 +89,12 @@ void InstantiateBullets(KeyCode keyPress, Vector2 force, Vector3 position)
         var bForce = Vector2.zero;
         switch (keyPress)
         {       
-            case KeyCode.DownArrow:
+		case KeyCode.UpArrow:
+			InstantiateBullet(position, new Vector2(0, force.x+300));
+			InstantiateBullet(position, new Vector2(-force.x/100f, force.y+300f));
+			InstantiateBullet(position, new Vector2(force.x/100f, force.y+300f));
+			break;    
+		case KeyCode.DownArrow:
 			InstantiateBullet(position, new Vector2(0, -force.x));
             InstantiateBullet(position, new Vector2(force.y/1.25f, -force.y+50f));
             InstantiateBullet(position, new Vector2(-force.y/1.25f, -force.y+50f));

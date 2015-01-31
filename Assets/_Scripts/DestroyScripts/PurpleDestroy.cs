@@ -5,6 +5,7 @@ public class PurpleDestroy : MonoBehaviour {
 	
 	public GameObject Bullet;
 	public GameObject CountManager;
+	public GameObject coins;
 	
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,7 @@ public class PurpleDestroy : MonoBehaviour {
 		    if (node.gameObject.tag == "Bullet")
 		    {
 		        CountManager.GetComponent<CountManager>().removeEnemy(gameObject);
+				Instantiate(coins, transform.position, transform.rotation);
 		        Destroy(gameObject);
 		    }
 		    //instantiate particle effect

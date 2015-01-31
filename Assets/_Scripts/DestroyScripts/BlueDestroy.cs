@@ -5,7 +5,7 @@ public class BlueDestroy : MonoBehaviour {
 	
 	public GameObject Bullet;
 	public GameObject CountManager;
-	
+	public GameObject coins;
 	// Use this for initialization
 	void Start () {
         CountManager = GameObject.FindGameObjectWithTag("CountManager");
@@ -23,6 +23,7 @@ public class BlueDestroy : MonoBehaviour {
 		    if (node.gameObject.tag == "Bullet")
 		    {
                 CountManager.GetComponent<CountManager>().removeEnemy(gameObject);
+				Instantiate(coins, transform.position, transform.rotation);
                 Destroy(gameObject);
 		    }
 		}
