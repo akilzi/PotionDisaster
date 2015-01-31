@@ -2,12 +2,6 @@
 
 public class MixController : MonoBehaviour
 {
-    public bool Red = false;
-    public bool Yellow = false;
-    public bool Blue = false;
-    public bool Purple = false;
-    public bool Green = false;
-    public bool Orange = false;
     public GameObject MixtureTub;
     public GameObject PotionASelected;
     public GameObject PotionBSelected;
@@ -16,6 +10,7 @@ public class MixController : MonoBehaviour
     public Sprite Sprite50;
     public Sprite Sprite75;
     public Sprite Sprite100;
+    public EntityColor MixedColor;
     public int PotionGain = 25;
     public int PotionCost = 0;
 
@@ -64,53 +59,29 @@ public class MixController : MonoBehaviour
         
         Debug.Log("~~~~Mix Button Pressed~~~~");
 
-        if (Red)
+        if (MixedColor == EntityColor.RED)
         {
             MixtureTub.renderer.sharedMaterial.color = Color.red;
-            //PotionASelected.renderer.sharedMaterial.color = Color.white;
-           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
-
-
         }
-        if (Blue)
+        if (MixedColor == EntityColor.BLUE)
         {
             MixtureTub.renderer.sharedMaterial.color = Color.blue;
-           // PotionASelected.renderer.sharedMaterial.color = Color.white;
-           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
-
-
         }
-        if (Yellow)
+        if (MixedColor == EntityColor.YELLOW)
         {
             MixtureTub.renderer.sharedMaterial.color = Color.yellow;
-           // PotionASelected.renderer.sharedMaterial.color = Color.white;
-           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
-
-
         }
-        if (Green)
+        if (MixedColor == EntityColor.ORANGE)
+        {
+            MixtureTub.renderer.sharedMaterial.color = new Color(1f, .607f, 0f, 1f); ;
+        }
+        if (MixedColor == EntityColor.GREEN)
         {
             MixtureTub.renderer.sharedMaterial.color = Color.green;
-            //PotionASelected.renderer.sharedMaterial.color = Color.white;
-           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
-
-
         }
-        if (Purple)
+        if (MixedColor == EntityColor.PURPLE)
         {
-            MixtureTub.renderer.sharedMaterial.color = Color.magenta;
-           // PotionASelected.renderer.sharedMaterial.color = Color.white;
-           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
-
-
-        }
-        if (Orange)
-        {
-			MixtureTub.renderer.sharedMaterial.color = new Color(1f, .607f, 0f, 1f);
-            //PotionASelected.renderer.sharedMaterial.color = Color.white;
-           // PotionBSelected.renderer.sharedMaterial.color = Color.white;
-
-
+            MixtureTub.renderer.sharedMaterial.color = Color.yellow;
         }
     }
 

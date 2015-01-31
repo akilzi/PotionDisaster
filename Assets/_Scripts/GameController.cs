@@ -10,11 +10,31 @@ public enum GameState
     EXITING
 };
 
+public enum CharacterOptions
+{
+    GUNNER,
+    CHEMIST
+};
+
+public enum EntityColor
+{
+    WHITE,
+    RED,
+    BLUE,
+    YELLOW,
+    ORANGE,
+    GREEN,
+    PURPLE
+};
+
 public class GameController : Photon.MonoBehaviour
 {
 	
     public static GameController Instance;
     public GameState GameState;
+    public CharacterOptions SelectedCharacter;
+
+    private int _enemyCount = 0;
 
     void Awake()
     {
@@ -32,8 +52,7 @@ public class GameController : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        Debug.Log(PhotonNetwork.connectionStateDetailed.ToString());
-	    if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
 	    {
 	        NextState();
 	    }
@@ -65,6 +84,7 @@ public class GameController : Photon.MonoBehaviour
         }
     }
 
+    # region Networking
     private void StartNetworking()
     {
         PhotonNetwork.logLevel = PhotonLogLevel.Full;
@@ -95,4 +115,22 @@ public class GameController : Photon.MonoBehaviour
             Debug.Log(photonPlayer.ToString());
         }
     }
+    #endregion
+
+    #region Enemy Management
+    public void AddEnemy(GameObject enemy)
+    {
+        _enemyCount++;
+    }
+
+    public void RemoveEnemy(GameObject enemy)
+    {
+        _enemyCount--;
+    }
+
+    public int GetEnemyCount()
+    {
+        return _enemyCount;
+    }
+    #endregion
 }

@@ -5,20 +5,40 @@ public class BulletController : MonoBehaviour
 {
 
     public Vector3 forceVector;
+    public EntityColor BulletColor;
+    
     private GameObject _potionLogic;
     private PotionCombinations _potionCombinations;
+    
 
 	void Start ()
 	{
 	    _potionLogic = GameObject.FindGameObjectWithTag("PotionLogic");
 	    _potionCombinations = _potionLogic.GetComponent<PotionCombinations>();
-	    renderer.sharedMaterial.color = _potionCombinations.SelectedColor;
-	    StartCoroutine(TTL());
 
-        if (renderer.sharedMaterial.color == Color.white)
-        {
-            renderer.sharedMaterial.color = _potionCombinations.SelectedColor;
-        }
+	    switch (_potionCombinations.MixedColor)
+	    {
+	        case EntityColor.BLUE:
+	            renderer.sharedMaterial.color = Color.blue;
+	            break;
+            case EntityColor.RED:
+                renderer.sharedMaterial.color = Color.red;
+                break;
+            case EntityColor.YELLOW:
+                renderer.sharedMaterial.color = Color.yellow;
+                break;
+            case EntityColor.PURPLE:
+                renderer.sharedMaterial.color = Color.magenta;
+                break;
+            case EntityColor.GREEN:
+                renderer.sharedMaterial.color = Color.green;
+                break;
+            case EntityColor.ORANGE:
+                renderer.sharedMaterial.color = new Color(1f, .607f, 0f, 1f);
+                break;
+	    }
+
+	    StartCoroutine(TTL());
 	}
 	
 	void Update () 

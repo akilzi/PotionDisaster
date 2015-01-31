@@ -47,11 +47,13 @@ public class CharacterSelect : Photon.MonoBehaviour {
     void RPCSelectGunner()
     {
         isGunner = true;
+        _gameManager.SelectedCharacter = CharacterOptions.GUNNER;
     }
 
     [RPC]
     void RPCSelectChemist()
     {
         isChemist = true;
+        _gameManager.SelectedCharacter = CharacterOptions.CHEMIST;
     }
 }

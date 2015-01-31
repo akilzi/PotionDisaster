@@ -3,20 +3,18 @@ using System.Collections;
 
 public class PotionCombinations : MonoBehaviour
 {
-
-    
-    private int numberOfPotionsSelected = 1;
     public string potionA;
     public string potionB;
     public string mixtures;
-    
-    
     public GameObject MixButton;
     public GameObject MixButtonButton;
-    public Color SelectedColor;
     public GameObject Player;
+    public EntityColor MixedColor;
+
+    private int numberOfPotionsSelected = 1;
     private PlayerController _playerController;
     private MixController _mixController;
+
     
 
     // Use this for initialization
@@ -29,79 +27,64 @@ public class PotionCombinations : MonoBehaviour
         
         MixButton.renderer.sharedMaterial.color = Color.white;
         
-        SelectedColor = Color.white;
+        MixedColor = EntityColor.WHITE;
     }
 
     private void Update()
     {
-        _mixController.Red = false;
-        _mixController.Yellow = false;
-        _mixController.Blue = false;
-        _mixController.Purple = false;
-        _mixController.Green = false;
-        _mixController.Orange = false;
         if (potionA == "Red" && potionB == "Red")
         {
             mixtures = "Super Red";
             MixButton.renderer.sharedMaterial.color = Color.red;
-            SelectedColor = Color.red;
-            _mixController.Red = true;
+            MixedColor = EntityColor.RED;
         }
         else if (potionA == "Blue" && potionB == "Blue")
         {
             mixtures = "Super Blue";
             MixButton.renderer.sharedMaterial.color = Color.blue;
-            SelectedColor = Color.blue;
-            _mixController.Blue = true;
+            MixedColor = EntityColor.BLUE;
         }
         else if (potionA == "Yellow" && potionB == "Yellow")
         {
             mixtures = "Super Yellow";
             MixButton.renderer.sharedMaterial.color = Color.yellow;
-            SelectedColor = Color.yellow;
-            _mixController.Yellow = true;
+            MixedColor = EntityColor.YELLOW;
         }
         else if (potionA == "Red" && potionB == "Blue")
         {
             mixtures = "Purple";
             MixButton.renderer.sharedMaterial.color = Color.magenta;
-            SelectedColor = Color.magenta;
-            _mixController.Purple = true;
+            MixedColor = EntityColor.PURPLE;
         }
         else if (potionA == "Blue" && potionB == "Red")
         {
             mixtures = "Purple";
             MixButton.renderer.sharedMaterial.color = Color.magenta;
-            SelectedColor = Color.magenta;
-            _mixController.Purple = true;
+            MixedColor = EntityColor.PURPLE;
         }
         else if (potionA == "Red" && potionB == "Yellow")
         {
             mixtures = "Orange";
 			MixButton.renderer.material.color = new Color(1f, .607f, 0f, 1f);
-			SelectedColor = new Color(1f, .607f, 0f, 1f);
-            _mixController.Orange = true;
+		    MixedColor = EntityColor.ORANGE;
         }
         else if (potionA == "Yellow" && potionB == "Red")
         {
             mixtures = "Orange";
 			MixButton.renderer.sharedMaterial.color = new Color(1f, .607f, 0f, 1f);
-			SelectedColor = new Color(1f, .607f, 0f, 1f);
-            _mixController.Orange = true;
+		    MixedColor = EntityColor.ORANGE;
         }
         else if (potionA == "Blue" && potionB == "Yellow")
         {
             mixtures = "Green";
             MixButton.renderer.sharedMaterial.color = Color.green;
-            SelectedColor = Color.green;
-            _mixController.Green = true;
+            MixedColor = EntityColor.GREEN;
         }
         else if (potionA == "Yellow" && potionB == "Blue")
         {
             mixtures = "Green";
             MixButton.renderer.sharedMaterial.color = Color.green;
-            SelectedColor = Color.green;
-            _mixController.Green = true;
+            MixedColor = EntityColor.GREEN;
         }
     }
 

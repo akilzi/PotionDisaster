@@ -3,17 +3,20 @@
 public class PlayerController : MonoBehaviour
 {
 
-	private float GunForce = 50.0f; //effects shooter velocity
-    public GameObject Bullet;
-    private int _frameCount = 0;
+	public GameObject Bullet;
     public GameObject ForcePoint;
     public bool ColorSelected = false;
     public GameObject MixButton;
-    private MixController _mixController;
-	private float randomNumber;
-	public GameObject particleEffect;
+    public GameObject particleEffect;
 	public GameObject GameManager;
 	public CharacterSelect CharSelect;
+    public EntityColor BulletColor;
+
+
+    private float GunForce = 50.0f; //effects shooter velocity
+    private MixController _mixController;
+    private float randomNumber;
+    private int _frameCount = 0;
     
     
 	void Start ()
