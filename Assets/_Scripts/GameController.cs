@@ -10,7 +10,7 @@ public enum GameState
     EXITING
 };
 
-public class GameController : MonoBehaviour
+public class GameController : Photon.MonoBehaviour
 {
 	
     public static GameController Instance;
@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        
+        PhotonNetwork.autoJoinLobby = false;
     }
 
 	// Use this for initialization
@@ -26,11 +26,13 @@ public class GameController : MonoBehaviour
 	{
         DontDestroyOnLoad(this);
 	    GameState = GameState.STARTING;
+        NextState();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
+        Debug.Log(PhotonNetwork.connectionStateDetailed.ToString());
 	    if (Input.GetKeyDown(KeyCode.Escape))
 	    {
 	        NextState();
@@ -63,13 +65,34 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void ChangeState(GameState nextState)
-    {
-        GameState = nextState;
-    }
-
     private void StartNetworking()
     {
-        
+        PhotonNetwork.logLevel = PhotonLogLevel.Full;
+        PhotonNetwork.ConnectUsingSettings("v0.1");
+    }
+
+    void OnPhotonCreateRoomFailed()
+    {
+        Debug.Log("Failed To Create Room");
+    }
+
+    void OnPhotonJoinRoomFailed()
+    {
+        PhotonNetwork.CreateRoom("KinskiiTest", new RoomOptions() { maxPlayers = 2 }, null);
+        //PhotonNetwork.JoinRoom("KinskiiTest");
+    }
+
+    void OnConnectedToMaster()
+    {
+        PhotonNetwork.JoinRoom("KinskiiTest");
+    }
+
+    void OnJoinedRoom()
+    {
+        Debug.Log("List of other players in room");
+        foreach (var photonPlayer in PhotonNetwork.otherPlayers)
+        {
+            Debug.Log(photonPlayer.ToString());
+        }
     }
 }
