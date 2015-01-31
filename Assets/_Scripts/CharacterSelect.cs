@@ -17,7 +17,7 @@ public class CharacterSelect : Photon.MonoBehaviour {
 
     void Update()
     {
-        if (isGunner && isChemist)
+        if (isGunner && isChemist && _gameManager.GameState == GameState.INITIALIZING)
         {
             _gameManager.NextState();
         }
