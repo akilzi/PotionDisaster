@@ -176,22 +176,15 @@ public class PotionCombinations : Photon.MonoBehaviour
     {
         if (stream.isWriting)
         {
-            PotionCombinationStruct psc = new PotionCombinationStruct
-            {
-                PotionA = potionA,
-                PotionB = potionB,
-                MixedColor = MixedColor
-            };
-
-            stream.SendNext(psc);
+            stream.SendNext(potionA);
+            stream.SendNext(potionB);
+            stream.SendNext((int)MixedColor);
         }
         else
         {
-            PotionCombinationStruct psc = (PotionCombinationStruct)stream.ReceiveNext();
-
-            potionA = psc.PotionA;
-            potionB = psc.PotionB;
-            MixedColor = psc.MixedColor;
+            potionA = (string)stream.ReceiveNext();
+            potionB = (string)stream.ReceiveNext();
+            MixedColor = (EntityColor)stream.ReceiveNext();
         }
     }
 }
