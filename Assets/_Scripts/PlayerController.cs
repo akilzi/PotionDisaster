@@ -33,6 +33,8 @@ public class PlayerController : Photon.MonoBehaviour
 		if (ColorSelected && _mixController.MixAmount > 0 && GameManager && CharSelect.isGunner)
 		{
 			
+            Debug.Log("Is Key Pressed: " + Input.anyKeyDown);
+
 			Vector2 bulletVector = Vector2.zero;
 			Vector2 forceVector = Vector2.zero;
 
@@ -127,5 +129,17 @@ public class PlayerController : Photon.MonoBehaviour
 		Bullet.rigidbody2D.AddForce(new Vector2(1000, 1000)); 
     }
 
-
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.localScale);
+        }
+        else
+        {
+            transform.position = (Vector3) stream.ReceiveNext();
+            transform.localScale = (Vector3) stream.ReceiveNext();
+        }
+    }
 }

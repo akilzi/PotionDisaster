@@ -3,15 +3,15 @@ using System.Collections;
 
 public class PotionCombinations : Photon.MonoBehaviour
 {
-    public string potionA;
-    public string potionB;
-    public string mixtures;
+    public string PotionA;
+    public string PotionB;
+    public string Mixtures;
     public GameObject MixButton;
     public GameObject MixButtonButton;
     public GameObject Player;
     public EntityColor MixedColor;
 
-    private int numberOfPotionsSelected = 1;
+    private int _numberOfPotionsSelected = 1;
     private PlayerController _playerController;
     private MixController _mixController;
 
@@ -29,7 +29,7 @@ public class PotionCombinations : Photon.MonoBehaviour
         _playerController = Player.GetComponent<PlayerController>();
         _mixController = MixButtonButton.GetComponent<MixController>();
 
-        Debug.Log(numberOfPotionsSelected);
+        Debug.Log(_numberOfPotionsSelected);
         
         MixButton.renderer.sharedMaterial.color = Color.white;
         
@@ -38,127 +38,115 @@ public class PotionCombinations : Photon.MonoBehaviour
 
     private void Update()
     {
-        if (potionA == "Red" && potionB == "Red")
+        if (PotionA == "Red" && PotionB == "Red")
         {
-            mixtures = "Super Red";
+            Mixtures = "Super Red";
             MixButton.renderer.sharedMaterial.color = Color.red;
             MixedColor = EntityColor.RED;
         }
-        else if (potionA == "Blue" && potionB == "Blue")
+        else if (PotionA == "Blue" && PotionB == "Blue")
         {
-            mixtures = "Super Blue";
+            Mixtures = "Super Blue";
             MixButton.renderer.sharedMaterial.color = Color.blue;
             MixedColor = EntityColor.BLUE;
         }
-        else if (potionA == "Yellow" && potionB == "Yellow")
+        else if (PotionA == "Yellow" && PotionB == "Yellow")
         {
-            mixtures = "Super Yellow";
+            Mixtures = "Super Yellow";
             MixButton.renderer.sharedMaterial.color = Color.yellow;
             MixedColor = EntityColor.YELLOW;
         }
-        else if (potionA == "Red" && potionB == "Blue")
+        else if (PotionA == "Red" && PotionB == "Blue")
         {
-            mixtures = "Purple";
+            Mixtures = "Purple";
             MixButton.renderer.sharedMaterial.color = Color.magenta;
             MixedColor = EntityColor.PURPLE;
         }
-        else if (potionA == "Blue" && potionB == "Red")
+        else if (PotionA == "Blue" && PotionB == "Red")
         {
-            mixtures = "Purple";
+            Mixtures = "Purple";
             MixButton.renderer.sharedMaterial.color = Color.magenta;
             MixedColor = EntityColor.PURPLE;
         }
-        else if (potionA == "Red" && potionB == "Yellow")
+        else if (PotionA == "Red" && PotionB == "Yellow")
         {
-            mixtures = "Orange";
+            Mixtures = "Orange";
 			MixButton.renderer.material.color = new Color(1f, .607f, 0f, 1f);
 		    MixedColor = EntityColor.ORANGE;
         }
-        else if (potionA == "Yellow" && potionB == "Red")
+        else if (PotionA == "Yellow" && PotionB == "Red")
         {
-            mixtures = "Orange";
+            Mixtures = "Orange";
 			MixButton.renderer.sharedMaterial.color = new Color(1f, .607f, 0f, 1f);
 		    MixedColor = EntityColor.ORANGE;
         }
-        else if (potionA == "Blue" && potionB == "Yellow")
+        else if (PotionA == "Blue" && PotionB == "Yellow")
         {
-            mixtures = "Green";
+            Mixtures = "Green";
             MixButton.renderer.sharedMaterial.color = Color.green;
             MixedColor = EntityColor.GREEN;
         }
-        else if (potionA == "Yellow" && potionB == "Blue")
+        else if (PotionA == "Yellow" && PotionB == "Blue")
         {
-            mixtures = "Green";
+            Mixtures = "Green";
             MixButton.renderer.sharedMaterial.color = Color.green;
             MixedColor = EntityColor.GREEN;
         }
+
+        _mixController.MixedColor = MixedColor;
     }
 
     [RPC]
     void RPCAddRedPotion()
     {
-        if (numberOfPotionsSelected == 2)
+        if (_numberOfPotionsSelected == 2)
         {
             _playerController.ColorSelected = true;
-            potionB = "Red";
+            PotionB = "Red";
             _mixController.Set2ndPotion(Color.red);
-            Debug.Log("mixture complete" + ", " + "potions are:" + " " + "potion A =" + " " + potionA + ", " +
-                      "potion B =" + " " + potionB + " -- " + "mixture is:" + " " + mixtures);
-            numberOfPotionsSelected = 1;
+            _numberOfPotionsSelected = 0;
         }
         else
         {
-            numberOfPotionsSelected++;
-            //Red = true;
-            potionA = "Red";
+            _numberOfPotionsSelected++;
+            PotionA = "Red";
             _mixController.Set1stPotion(Color.red);
-            //checkMixtures ();
         }
     }
 
     [RPC]
     void RPCAddBluePotion()
     {
-        if (numberOfPotionsSelected == 2)
+        if (_numberOfPotionsSelected == 2)
         {
             _playerController.ColorSelected = true;
-            potionB = "Blue";
+            PotionB = "Blue";
             _mixController.Set2ndPotion(Color.blue);
-            Debug.Log("mixture complete" + ", " + "potions are:" + " " + "potion A =" + " " + potionA + ", " +
-                      "potion B =" + " " + potionB + " -- " + "mixture is:" + " " + mixtures);
-            numberOfPotionsSelected = 1;
-            //potionA = " ";
-            //potionB = " ";
+            _numberOfPotionsSelected = 0;
         }
         else
         {
-            numberOfPotionsSelected++;
-            //Blue = true;
-            potionA = "Blue";
+            _numberOfPotionsSelected++;
+            PotionA = "Blue";
             _mixController.Set1stPotion(Color.blue);
-
         }
     }
 
     [RPC]
     void RPCAddYellowPotion()
     {
-        if (numberOfPotionsSelected == 2)
+        if (_numberOfPotionsSelected == 2)
         {
             _playerController.ColorSelected = true;
-            potionB = "Yellow";
+            PotionB = "Yellow";
             _mixController.Set2ndPotion(Color.yellow);
-            numberOfPotionsSelected = 1;
-            //potionA = " ";
-            //potionB = " ";
+            _numberOfPotionsSelected = 0;
         }
         else
         {
-            numberOfPotionsSelected++;
-            //Yellow = true;
-            potionA = "Yellow";
+            _numberOfPotionsSelected++;
+            PotionA = "Yellow";
             _mixController.Set1stPotion(Color.yellow);
-
         }
     }
     //RED

@@ -14,7 +14,7 @@ public class MixController : Photon.MonoBehaviour
     public int PotionGain = 25;
     public int PotionCost = 0;
 
-    public int MixAmount = 100; //Can go to 100
+    public int MixAmount = 0; //Can go to 100
 	void Start () 
     {
         MixtureTub.renderer.sharedMaterial.color = Color.white;
@@ -50,13 +50,22 @@ public class MixController : Photon.MonoBehaviour
 
     public void MixButtonPressed()
     {
+        if (PhotonNetwork.connectionStateDetailed == PeerState.Joined)
+        {
+            photonView.RPC("RPCMixButtonPressed", PhotonTargets.All);
+        }
+    }
+
+    [RPC]
+    void RPCMixButtonPressed()
+    {
         MixAmount += PotionGain;
         if (MixAmount > 100)
         {
             MixAmount = 100;
         }
 
-        
+
         Debug.Log("~~~~Mix Button Pressed~~~~");
 
         if (MixedColor == EntityColor.RED)
