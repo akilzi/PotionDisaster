@@ -11,10 +11,10 @@ public class LabSceneController : MonoBehaviour
 
 	    if (_gameController.CharacterType == CharacterOptions.GUNNER)
 	    {
-            //GameObject.FindGameObjectWithTag("RedButton").GetComponent<Button>().enabled = false;
-            //GameObject.FindGameObjectWithTag("BlueButton").GetComponent<Button>().enabled = false;
-            //GameObject.FindGameObjectWithTag("YellowButton").GetComponent<Button>().enabled = false;
-            //GameObject.FindGameObjectWithTag("MixButton").GetComponent<Button>().enabled = false;
+            GameObject.FindGameObjectWithTag("RedButton").GetComponent<UIButton>().enabled = false;
+            GameObject.FindGameObjectWithTag("BlueButton").GetComponent<UIButton>().enabled = false;
+            GameObject.FindGameObjectWithTag("YellowButton").GetComponent<UIButton>().enabled = false;
+            GameObject.FindGameObjectWithTag("MixButton").GetComponent<UIButton>().enabled = false;
 	    }
 	}
 	

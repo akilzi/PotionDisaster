@@ -94,12 +94,9 @@ public class PotionCombinations : Photon.MonoBehaviour
         }
     }
 
-
-    //RED
-
-    public void redActive()
+    [RPC]
+    void RPCAddRedPotion()
     {
-        Debug.Log(numberOfPotionsSelected);
         if (numberOfPotionsSelected == 2)
         {
             _playerController.ColorSelected = true;
@@ -111,7 +108,7 @@ public class PotionCombinations : Photon.MonoBehaviour
         }
         else
         {
-            numberOfPotionsSelected ++;
+            numberOfPotionsSelected++;
             //Red = true;
             potionA = "Red";
             _mixController.Set1stPotion(Color.red);
@@ -119,11 +116,9 @@ public class PotionCombinations : Photon.MonoBehaviour
         }
     }
 
-    //BLUE
-
-    public void blueActive()
+    [RPC]
+    void RPCAddBluePotion()
     {
-        Debug.Log(numberOfPotionsSelected);
         if (numberOfPotionsSelected == 2)
         {
             _playerController.ColorSelected = true;
@@ -137,7 +132,7 @@ public class PotionCombinations : Photon.MonoBehaviour
         }
         else
         {
-            numberOfPotionsSelected ++;
+            numberOfPotionsSelected++;
             //Blue = true;
             potionA = "Blue";
             _mixController.Set1stPotion(Color.blue);
@@ -145,30 +140,54 @@ public class PotionCombinations : Photon.MonoBehaviour
         }
     }
 
-    //YELLOW
-
-    public void yellowActive()
+    [RPC]
+    void RPCAddYellowPotion()
     {
-
-        Debug.Log(numberOfPotionsSelected);
         if (numberOfPotionsSelected == 2)
         {
             _playerController.ColorSelected = true;
             potionB = "Yellow";
             _mixController.Set2ndPotion(Color.yellow);
-            Debug.Log("mixture complete" + ", " + "potions are:" + " " + "potion A =" + " " + potionA + ", " +
-                      "potion B =" + " " + potionB + " -- " + "mixture is:" + " " + mixtures);
             numberOfPotionsSelected = 1;
             //potionA = " ";
             //potionB = " ";
         }
         else
         {
-            numberOfPotionsSelected ++;
+            numberOfPotionsSelected++;
             //Yellow = true;
             potionA = "Yellow";
             _mixController.Set1stPotion(Color.yellow);
 
+        }
+    }
+    //RED
+    public void AddRedPotion()
+    {
+        if (PhotonNetwork.connectionStateDetailed == PeerState.Joined)
+        {
+            photonView.RPC("RPCAddRedPotion", PhotonTargets.All);
+        }
+    }
+
+    //BLUE
+
+    public void AddBluePotion()
+    {
+        if (PhotonNetwork.connectionStateDetailed == PeerState.Joined)
+        {
+            photonView.RPC("RPCAddBluePotion", PhotonTargets.All);
+        }
+    }
+
+    //YELLOW
+
+    public void AddYellowPotion()
+    {
+
+        if (PhotonNetwork.connectionStateDetailed == PeerState.Joined)
+        {
+            photonView.RPC("RPCAddYellowPotion", PhotonTargets.All);
         }
     }
 
