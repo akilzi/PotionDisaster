@@ -87,7 +87,7 @@ public class GameController : Photon.MonoBehaviour
     # region Networking
     private void StartNetworking()
     {
-        PhotonNetwork.logLevel = PhotonLogLevel.Full;
+        PhotonNetwork.logLevel = PhotonLogLevel.ErrorsOnly;
         PhotonNetwork.ConnectUsingSettings("v0.1");
     }
 

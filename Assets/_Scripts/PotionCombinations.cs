@@ -191,19 +191,19 @@ public class PotionCombinations : Photon.MonoBehaviour
         }
     }
 
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.isWriting)
-        {
-            stream.SendNext(potionA);
-            stream.SendNext(potionB);
-            stream.SendNext((int)MixedColor);
-        }
-        else
-        {
-            potionA = (string)stream.ReceiveNext();
-            potionB = (string)stream.ReceiveNext();
-            MixedColor = (EntityColor)stream.ReceiveNext();
-        }
-    }
+    //void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    //{
+    //    if (stream.isWriting)
+    //    {
+    //        stream.SendNext(potionA);
+    //        stream.SendNext(potionB);
+    //        stream.SendNext((int)MixedColor);
+    //    }
+    //    else
+    //    {
+    //        potionA = (string)stream.ReceiveNext();
+    //        potionB = (string)stream.ReceiveNext();
+    //        MixedColor = (EntityColor)stream.ReceiveNext();
+    //    }
+    //}
 }
