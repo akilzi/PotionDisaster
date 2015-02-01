@@ -34,7 +34,7 @@ public class CharacterSelect : Photon.MonoBehaviour {
         _gameManager.CharacterType = CharacterOptions.GUNNER;
 	    if (PhotonNetwork.connectionStateDetailed == PeerState.Joined)
 	    {
-	        this.photonView.RPC("RPCSelectGunner", PhotonTargets.All);
+	        photonView.RPC("RPCSelectGunner", PhotonTargets.All);
 	    }
 	}
 
@@ -43,7 +43,7 @@ public class CharacterSelect : Photon.MonoBehaviour {
         _gameManager.CharacterType = CharacterOptions.CHEMIST;
         if (PhotonNetwork.connectionStateDetailed == PeerState.Joined)
         {
-            this.photonView.RPC("RPCSelectChemist", PhotonTargets.All);
+            photonView.RPC("RPCSelectChemist", PhotonTargets.All);
         }
 	}
 

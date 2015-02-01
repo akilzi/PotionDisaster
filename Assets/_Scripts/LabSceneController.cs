@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class LabSceneController : MonoBehaviour
 {
@@ -12,10 +11,10 @@ public class LabSceneController : MonoBehaviour
 
 	    if (_gameController.CharacterType == CharacterOptions.GUNNER)
 	    {
-	        GameObject.FindGameObjectWithTag("RedButton").GetComponent<Button>().enabled = false;
-            GameObject.FindGameObjectWithTag("BlueButton").GetComponent<Button>().enabled = false;
-            GameObject.FindGameObjectWithTag("YellowButton").GetComponent<Button>().enabled = false;
-            GameObject.FindGameObjectWithTag("MixButton").GetComponent<Button>().enabled = false;
+            //GameObject.FindGameObjectWithTag("RedButton").GetComponent<Button>().enabled = false;
+            //GameObject.FindGameObjectWithTag("BlueButton").GetComponent<Button>().enabled = false;
+            //GameObject.FindGameObjectWithTag("YellowButton").GetComponent<Button>().enabled = false;
+            //GameObject.FindGameObjectWithTag("MixButton").GetComponent<Button>().enabled = false;
 	    }
 	}
 	
