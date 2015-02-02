@@ -33,6 +33,9 @@ public class GameController : Photon.MonoBehaviour
     public static GameController Instance;
     public GameState GameState;
     public CharacterOptions CharacterType;
+    public MixController MixController;
+    public PlayerController PlayerController;
+    public bool ColorSelected = false;
 
     private int _enemyCount = 0;
 

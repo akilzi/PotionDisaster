@@ -95,14 +95,14 @@ public class MonsterScript : Photon.MonoBehaviour
                 0);
             _gameController.AddEnemy(randomEnemy);
 
-            randomEnemy = PhotonNetwork.Instantiate(randomEnemyName, new Vector3(x, y), Quaternion.identity,
-                0);
-            _gameController.AddEnemy(randomEnemy);
+            //randomEnemy = PhotonNetwork.Instantiate(randomEnemyName, new Vector3(x, y), Quaternion.identity,
+            //    0);
+            //_gameController.AddEnemy(randomEnemy);
 
 
-            randomEnemy = PhotonNetwork.Instantiate(randomEnemyName, new Vector3(x, y), Quaternion.identity,
-                0);
-            _gameController.AddEnemy(randomEnemy);
+            //randomEnemy = PhotonNetwork.Instantiate(randomEnemyName, new Vector3(x, y), Quaternion.identity,
+            //    0);
+            //_gameController.AddEnemy(randomEnemy);
         }
     }
     IEnumerator EnemyReplicator()

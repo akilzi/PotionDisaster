@@ -15,6 +15,7 @@ public class BulletController : MonoBehaviour
 	{
 	    _potionLogic = GameObject.FindGameObjectWithTag("PotionLogic");
 	    _potionCombinations = _potionLogic.GetComponent<PotionCombinations>();
+	    BulletColor = _potionCombinations.MixedColor;
 
 	    switch (_potionCombinations.MixedColor)
 	    {
@@ -43,8 +44,6 @@ public class BulletController : MonoBehaviour
 	
 	void Update () 
     {
-	    
-
 	    if (gameObject.activeSelf)
 	    {
             if (!float.IsNaN(forceVector.x))
@@ -69,5 +68,17 @@ public class BulletController : MonoBehaviour
             yield return 0;
 
         Destroy(gameObject);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(transform.position);
+        }
+        else
+        {
+            transform.position = (Vector3) stream.ReceiveNext();
+        }
     }
 }

@@ -12,22 +12,14 @@ public class PotionCombinations : Photon.MonoBehaviour
     public EntityColor MixedColor;
 
     private int _numberOfPotionsSelected = 1;
-    private PlayerController _playerController;
     private MixController _mixController;
+    private GameController _gameController;
 
-    private struct PotionCombinationStruct
-    {
-        public string PotionA;
-        public string PotionB;
-        public EntityColor MixedColor;
-
-    };
-
-    // Use this for initialization
     private void Start()
     {
-        _playerController = Player.GetComponent<PlayerController>();
+        
         _mixController = MixButtonButton.GetComponent<MixController>();
+        _gameController = GameObject.Find("GameManager").GetComponent<GameController>();
 
         Debug.Log(_numberOfPotionsSelected);
         
@@ -93,7 +85,12 @@ public class PotionCombinations : Photon.MonoBehaviour
             MixedColor = EntityColor.GREEN;
         }
 
-        _mixController.MixedColor = MixedColor;
+        if (MixedColor != EntityColor.WHITE)
+        {
+            _mixController.MixedColor = MixedColor;
+            _gameController.ColorSelected = true;
+        }
+        
     }
 
     [RPC]
@@ -101,7 +98,7 @@ public class PotionCombinations : Photon.MonoBehaviour
     {
         if (_numberOfPotionsSelected == 2)
         {
-            _playerController.ColorSelected = true;
+            _gameController.ColorSelected = true;
             PotionB = "Red";
             _mixController.Set2ndPotion(Color.red);
             _numberOfPotionsSelected = 0;
@@ -119,7 +116,7 @@ public class PotionCombinations : Photon.MonoBehaviour
     {
         if (_numberOfPotionsSelected == 2)
         {
-            _playerController.ColorSelected = true;
+            _gameController.ColorSelected = true;
             PotionB = "Blue";
             _mixController.Set2ndPotion(Color.blue);
             _numberOfPotionsSelected = 0;
@@ -137,7 +134,7 @@ public class PotionCombinations : Photon.MonoBehaviour
     {
         if (_numberOfPotionsSelected == 2)
         {
-            _playerController.ColorSelected = true;
+            _gameController.ColorSelected = true;
             PotionB = "Yellow";
             _mixController.Set2ndPotion(Color.yellow);
             _numberOfPotionsSelected = 0;

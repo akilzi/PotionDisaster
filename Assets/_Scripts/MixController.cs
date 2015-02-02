@@ -11,10 +11,11 @@ public class MixController : Photon.MonoBehaviour
     public Sprite Sprite75;
     public Sprite Sprite100;
     public EntityColor MixedColor;
-    public int PotionGain = 25;
+    public int PotionGain = 250;
     public int PotionCost = 0;
 
     public int MixAmount = 0; //Can go to 100
+    public int MaxAmount = 1000;
 	void Start () 
     {
         MixtureTub.renderer.sharedMaterial.color = Color.white;
@@ -29,19 +30,19 @@ public class MixController : Photon.MonoBehaviour
 	    {
             MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite0;
                 
-	    } else if (MixAmount <= 25)
+	    } else if (MixAmount <= 250)
 	    {
             MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite25;
                 
-	    } else if (MixAmount <= 50)
+	    } else if (MixAmount <= 500)
 	    {
             MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite50;
                 
-	    } else if (MixAmount <= 75)
+	    } else if (MixAmount <= 750)
 	    {
             MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite75;
                 
-	    } else if (MixAmount <= 100)
+	    } else if (MixAmount <= 1000)
 	    {
             MixtureTub.GetComponent<SpriteRenderer>().sprite = Sprite100;
                 
@@ -60,9 +61,9 @@ public class MixController : Photon.MonoBehaviour
     void RPCMixButtonPressed()
     {
         MixAmount += PotionGain;
-        if (MixAmount > 100)
+        if (MixAmount > MaxAmount)
         {
-            MixAmount = 100;
+            MixAmount = MaxAmount;
         }
 
 
@@ -109,12 +110,21 @@ public class MixController : Photon.MonoBehaviour
         MixAmount = 0;
     }
 
-    public void ExpendPotion()
+    [RPC]
+    void RPCExpendPotion()
     {
         MixAmount -= PotionCost;
         if (MixAmount < 0)
         {
             MixAmount = 0;
+        }
+    }
+
+    public void ExpendPotion()
+    {
+        if (PhotonNetwork.connectionStateDetailed == PeerState.Joined)
+        {
+            photonView.RPC("RPCExpendPotion", PhotonTargets.All);
         }
     }
 
